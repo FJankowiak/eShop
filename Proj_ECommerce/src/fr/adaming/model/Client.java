@@ -20,10 +20,7 @@ public class Client implements Serializable {
 	private String adresse;
 	private String email;
 	private String tel;
-	private String mdp;
-
-
-
+	
 	// Transformer l'association UML en java
 	@OneToMany(mappedBy="client")
 	private List<Commande> listeCommandes;
@@ -37,24 +34,22 @@ public class Client implements Serializable {
 	
 
 
-	public Client(String nomClient, String adresse, String email, String tel, String mdp) {
+	public Client(String nomClient, String adresse, String email, String tel) {
 		super();
 		this.nomClient = nomClient;
 		this.adresse = adresse;
 		this.email = email;
 		this.tel = tel;
-		this.mdp = mdp;
 	}
 
 
-	public Client(Long idClient, String nomClient, String adresse, String email, String tel, String mdp) {
+	public Client(Long idClient, String nomClient, String adresse, String email, String tel) {
 		super();
 		this.idClient = idClient;
 		this.nomClient = nomClient;
 		this.adresse = adresse;
 		this.email = email;
 		this.tel = tel;
-		this.mdp = mdp;
 	}
 
 
@@ -107,37 +102,25 @@ public class Client implements Serializable {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	
-	public String getMdp() {
-		return mdp;
-	}
-
-	
-	public void setMdp(String mdp) {
-		this.mdp = mdp;
-	}
 
 
 	public List<Commande> getListeCommandes() {
 		return listeCommandes;
 	}
 
+
 	public void setListeCommandes(List<Commande> listeCommandes) {
 		this.listeCommandes = listeCommandes;
 	}
+
 
 
 	// declaration des methodes
 	@Override
 	public String toString() {
 		return "Client [idClient=" + idClient + ", nomClient=" + nomClient + ", adresse=" + adresse + ", email=" + email
-				+ ", tel=" + tel + ", mdp=" + mdp + ", listeCommandes=" + listeCommandes + "]";
+				+ ", tel=" + tel + "]";
 	}
-
-
-
-	
-
 	
 	
 	
