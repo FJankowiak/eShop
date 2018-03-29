@@ -1,10 +1,12 @@
 package fr.adaming.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,6 +18,10 @@ public class Admin implements Serializable{
 	private int id;
 	private String mail;
 	private String mdp;
+	
+	// Tranformation association UML en Java
+	@OneToMany(mappedBy="admin")
+	private List<Produit> listeProduits;
 	
 	// Declaration des constructeurs
 	public Admin() {
