@@ -66,8 +66,17 @@ public class Admin implements Serializable{
 	public void setMdp(String mdp) {
 		this.mdp = mdp;
 	}
-
 	
+	public List<Produit> getListeProduits() {
+		return listeProduits;
+	}
+
+	public void setListeProduits(List<Produit> listeProduits) {
+		this.listeProduits = listeProduits;
+	}
+	
+	
+
 	// declaration des methodes
 	@Override
 	public String toString() {
