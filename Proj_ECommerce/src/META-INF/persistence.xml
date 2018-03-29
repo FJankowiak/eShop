@@ -11,7 +11,6 @@
 		<class>fr.adaming.model.Commande</class>
 		<class>fr.adaming.model.Produit</class>
 		<class>fr.adaming.model.Categorie</class>
-		<class>fr.adaming.model.Panier</class>
 
 		<!-- Les props de hibernate -->
 		<properties>
