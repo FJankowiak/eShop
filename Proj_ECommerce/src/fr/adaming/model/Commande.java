@@ -24,7 +24,7 @@ public class Commande implements Serializable {
 	
 	// Transformer l'association UML en java
 	@ManyToOne
-	@JoinColumn(name = "id_cl", referencedColumnName = "cl_id")
+	@JoinColumn(name = "cl_id", referencedColumnName = "id_cl")
 	private Client client;
 	
 	@OneToMany(mappedBy="commande")
