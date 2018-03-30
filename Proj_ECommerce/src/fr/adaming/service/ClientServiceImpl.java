@@ -13,8 +13,8 @@ public class ClientServiceImpl implements IClientService {
 	private IClientDao clientDao;
 
 	@Override
-	public Client isExist(Client a) {
-		return clientDao.addClient(a);
+	public Client addClient(Client cl) {
+		return clientDao.addClient(cl);
 	}
 	
 	
