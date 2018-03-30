@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
 
@@ -32,12 +33,15 @@ public class ProduitDaoImpl implements IProduitDao{
 		
 		//REQUETE JPQL
 		
-		String req="SELECT Produit prod FROM produits prod";
+		String req="SELECT prod FROM Produit prod ";
 		
 		//CREER UN OBJET QUERY POUR ENVOYER LA REQUETE JPQL
 		
 		Query query=em.createQuery(req);
 		
+		
+		
+	
 		//ENVOYER LA REQUETE ET RECUPERER LE RESULTAT DE LA LISTE
 		
 		return query.getResultList();

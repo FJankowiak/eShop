@@ -6,11 +6,47 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<title>Page login</title>
+<title>Tableau de bord administrateurs</title>
+
 </h:head>
 
 <h:body>
-JE SUIS UN ADMIN !! YAHOUUUUUU !
+
+<p:breadCrumb>
+    <p:menuitem value="Tableau Administrateur" url="listesAdmin.xhtml" />
+    <p:menuitem value="Ajouter" url="ajoutProd.xhtml" />
+    
+</p:breadCrumb>
+
+<p:dataTable var="pd" value="#{sessionScope.listeProduits}">
+    <p:column headerText="Id">
+        <h:outputText value="#{pd.id}" />
+    </p:column>
+ 
+    <p:column headerText="designation">
+        <h:outputText value="#{pd.designation}" />
+    </p:column>
+ 
+    <p:column headerText="Description">
+        <h:outputText value="#{pd.description}" />
+    </p:column>
+ 
+    <p:column headerText="Prix">
+        <h:outputText value="#{pd.prix}" />
+    </p:column>
+    
+      <p:column headerText="Quantite">
+        <h:outputText value="#{pd.quantite}" />
+    </p:column>
+    
+      <p:column headerText="Selectionné">
+        <h:outputText value="#{pd.selectionne}" />
+    </p:column>
+    
+      <p:column headerText="Photo">
+        <h:outputText value="#{pd.photo}" />
+    </p:column>
+</p:dataTable>
 
 
 </h:body>

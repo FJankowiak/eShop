@@ -17,6 +17,10 @@ public class Produit implements Serializable {
 	
 	//DECLARATION DES ATTRIBUTS
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_p")
@@ -54,8 +58,7 @@ public class Produit implements Serializable {
 	//CONSTRUCTEURS SANS ID
 	
 
-	public Produit(String designation, String description, double prix, int quantite, boolean selectionne, byte[] photo,
-			Categorie cat, Admin admin) {
+	public Produit(String designation, String description, double prix, int quantite, boolean selectionne, byte[] photo) {
 		super();
 		this.designation = designation;
 		this.description = description;
@@ -63,8 +66,6 @@ public class Produit implements Serializable {
 		this.quantite = quantite;
 		this.selectionne = selectionne;
 		this.photo = photo;
-		this.cat = cat;
-		this.admin = admin;
 	}
 	
 	//CONSTRUCTEURS PLEINS
@@ -72,7 +73,7 @@ public class Produit implements Serializable {
 
 
 	public Produit(Long id, String designation, String description, double prix, int quantite, boolean selectionne,
-			byte[] photo, Categorie cat, Admin admin) {
+			byte[] photo) {
 		super();
 		this.id = id;
 		this.designation = designation;
@@ -81,8 +82,6 @@ public class Produit implements Serializable {
 		this.quantite = quantite;
 		this.selectionne = selectionne;
 		this.photo = photo;
-		this.cat = cat;
-		this.admin = admin;
 	}
 
 	
@@ -90,18 +89,16 @@ public class Produit implements Serializable {
 	//GETTERS ET SETTERS
 	
 
-
-	public String getDesignation() {
-		return designation;
-	}
-
-
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getDesignation() {
+		return designation;
 	}
 
 	public void setDesignation(String designation) {

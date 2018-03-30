@@ -6,6 +6,8 @@ import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
 import fr.adaming.dao.IProduitDao;
+import fr.adaming.model.Admin;
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 @Stateful
 public class ProduitServiceImpl implements IProduitService {
@@ -18,8 +20,9 @@ public class ProduitServiceImpl implements IProduitService {
 	
 	
 	@Override
-	public Produit addProduit(Produit prod) {
+	public Produit addProduit(Produit prod,Admin admin) {
 		
+		prod.setAdmin(admin);
 		
 		return prodDao.addProduit(prod);
 	}
@@ -33,15 +36,17 @@ public class ProduitServiceImpl implements IProduitService {
 	
 	//MODIIFER UN PRODUIT
 	@Override
-	public int updateProduit(Produit prod) {
+	public int updateProduit(Produit prod,Admin admin) {
+		prod.setAdmin(admin);
+		
 	
 		return prodDao.updateProduit(prod);
 	}
 
 	//SUPPRIMER UN PRODUIT
 	@Override
-	public int deleteProduit(Produit prod) {
-		
+	public int deleteProduit(Produit prod,Admin admin) {
+		prod.setAdmin(admin);
 		return 0;
 	}
 
