@@ -24,7 +24,6 @@ public class ClientDaoImpl implements IClientDao {
 		
 		// Passage des params
 		query.setParameter("pMail", cl.getEmail());
-		query.setParameter("pMdp", cl.getMdp());
 		
 		return (Client) query.getResultList();
 	}
