@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
+import fr.adaming.dao.ICommandeDao;
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
 import fr.adaming.model.LigneCommande;
@@ -13,11 +14,11 @@ import fr.adaming.model.LigneCommande;
 public class CommandeServiceImpl implements ICommandeService {
 	// Association UML en java
 	@EJB
-	ICommandeService commandeService;
+	private ICommandeDao commandeDao;
 
 	@Override
 	public Commande finaliserCommande(List<LigneCommande> liste, Client cl) {
-		return commandeService.finaliserCommande(liste, cl);
+		return commandeDao.finaliserCommande(liste, cl);
 	}
 
 }
