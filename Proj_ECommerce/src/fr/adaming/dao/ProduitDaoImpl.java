@@ -43,8 +43,10 @@ public class ProduitDaoImpl implements IProduitDao{
 		
 	
 		//ENVOYER LA REQUETE ET RECUPERER LE RESULTAT DE LA LISTE
-		
-		return query.getResultList();
+		List<Produit> prl = query.getResultList();
+		System.out.println(prl);
+				
+		return prl;
 	}
 	
 	

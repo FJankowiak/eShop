@@ -16,8 +16,11 @@ public class ClientDaoImpl implements IClientDao {
 	private EntityManager em;
 
 	@Override
-	public Client isExist(Client cl) {
-		String req = "SELECT cl FROM Client cl WHERE cl.email=:pMail AND cl.mdp=:pMdp";
+	public Client addClient(Client cl) {
+		em.persist(cl);
+		
+		
+		String req = "INSERT Client cl SET cl.email=:pMail AND cl.mdp=:pMdp";
 		
 		// créer la requete jpql
 		Query query = em.createQuery(req);
@@ -27,5 +30,4 @@ public class ClientDaoImpl implements IClientDao {
 		
 		return (Client) query.getResultList();
 	}
-	
 }
