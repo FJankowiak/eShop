@@ -18,6 +18,7 @@ import javax.persistence.Table;
 @Table(name = "commandes")
 public class Commande implements Serializable {
 	
+	
 	// Declaration des attributs
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

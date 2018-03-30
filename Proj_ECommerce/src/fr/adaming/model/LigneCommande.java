@@ -11,36 +11,32 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "lignes_commande")
-public class LigneCommande implements Serializable{
-	
+public class LigneCommande implements Serializable {
+
 	// Declaration des attributs
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_li")
 	private Long id_ligne;
 	private int quantite;
 	private double prix;
-	
+
 	// Declaration des constructeurs
 	public LigneCommande() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
 
 	// Transformer l'association UML en java
 	@ManyToOne
 	@JoinColumn(name = "p_id", referencedColumnName = "id_p")
 	private Produit produit;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "co_id", referencedColumnName = "id_co")
 	private Commande commande;
-	
-	
 
 	// Declaration des getters et setters
 	public LigneCommande(int quantite, double prix) {
@@ -64,7 +60,7 @@ public class LigneCommande implements Serializable{
 	public void setPrix(double prix) {
 		this.prix = prix;
 	}
-	
+
 	public Long getId_ligne() {
 		return id_ligne;
 	}
@@ -94,10 +90,5 @@ public class LigneCommande implements Serializable{
 	public String toString() {
 		return "LigneCommande [quantite=" + quantite + ", prix=" + prix + "]";
 	}
-	
-	
-	
-	
-	
 
 }

@@ -15,6 +15,7 @@ import javax.persistence.Table;
 @Table(name = "admins")
 public class Admin implements Serializable{
 	// Declaration des attributs
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id_ad")
