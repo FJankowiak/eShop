@@ -33,19 +33,19 @@
 
 	</managed-bean>
 
-<!-- 	<managed-bean> -->
-<!-- 		<managed-bean-name>lcMB</managed-bean-name> -->
-<!-- 		<managed-bean-class>fr.adaming.managedBeans.LigneCommandeManagedBean</managed-bean-class> -->
-<!-- 		<managed-bean-scope>request</managed-bean-scope> -->
+	<managed-bean>
+		<managed-bean-name>lcMB</managed-bean-name>
+		<managed-bean-class>fr.adaming.managedBeans.LigneCommandeManagedBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
 
-<!-- 	</managed-bean> -->
+	</managed-bean>
 
-<!-- 	<managed-bean> -->
-<!-- 		<managed-bean-name>coMB</managed-bean-name> -->
-<!-- 		<managed-bean-class>fr.adaming.managedBeans.CommandeManagedBean</managed-bean-class> -->
-<!-- 		<managed-bean-scope>request</managed-bean-scope> -->
+	<managed-bean>
+		<managed-bean-name>coMB</managed-bean-name>
+		<managed-bean-class>fr.adaming.managedBeans.CommandeManagedBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
 
-<!-- 	</managed-bean> -->
+	</managed-bean>
 
 
 </faces-config>
