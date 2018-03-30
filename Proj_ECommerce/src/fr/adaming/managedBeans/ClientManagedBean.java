@@ -1,6 +1,7 @@
 package fr.adaming.managedBeans;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -63,8 +64,16 @@ public class ClientManagedBean implements Serializable{
 	}
 	
 	// Méthodes
-	public void creerClient(){
+	public String creerClient(){
+		Client clAjout = clientService.addClient(this.client);
 		
+		if(clAjout.getIdClient() != 0){
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("clientCommande", clAjout);
+
+			return "commandeValidee";
+		} else {
+			return "clientCreation";
+		}
 	}
 
 }

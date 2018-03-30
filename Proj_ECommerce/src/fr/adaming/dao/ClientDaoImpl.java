@@ -19,15 +19,6 @@ public class ClientDaoImpl implements IClientDao {
 	public Client addClient(Client cl) {
 		em.persist(cl);
 		
-		
-		String req = "INSERT Client cl SET cl.email=:pMail AND cl.mdp=:pMdp";
-		
-		// créer la requete jpql
-		Query query = em.createQuery(req);
-		
-		// Passage des params
-		query.setParameter("pMail", cl.getEmail());
-		
-		return (Client) query.getResultList();
+		return cl;
 	}
 }

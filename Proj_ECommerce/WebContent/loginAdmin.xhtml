@@ -15,7 +15,7 @@
 	<h:form>
 		<h:panelGrid columns="2">
 			 Mail : <h:inputText value = "#{aMB.admin.mail}"/>
-			 Mot de passe : <h:inputText value="#{aMB.admin.mdp}"/>
+			 Mot de passe : <h:inputSecret value="#{aMB.admin.mdp}"/>
 			<h:commandButton value="Se connecter" action="#{aMB.seConnecter}" />
 		</h:panelGrid>
 
