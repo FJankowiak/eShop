@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 @Entity
@@ -25,7 +26,7 @@ public class Produit implements Serializable {
 	private double prix;
 	private int quantite;
 	private boolean selectionne;
-	private String photo;
+	private @Lob byte[] photo;
 	
 	
 	//TRANSFORMATION DE L'ASSOCIATION EN UML EN JAVA
@@ -52,8 +53,9 @@ public class Produit implements Serializable {
 	
 	//CONSTRUCTEURS SANS ID
 	
-	public Produit(String designation, String description, double prix, int quantite, boolean selectionne,
-			String photo) {
+
+	public Produit(String designation, String description, double prix, int quantite, boolean selectionne, byte[] photo,
+			Categorie cat, Admin admin) {
 		super();
 		this.designation = designation;
 		this.description = description;
@@ -61,12 +63,16 @@ public class Produit implements Serializable {
 		this.quantite = quantite;
 		this.selectionne = selectionne;
 		this.photo = photo;
+		this.cat = cat;
+		this.admin = admin;
 	}
 	
 	//CONSTRUCTEURS PLEINS
+	
+
 
 	public Produit(Long id, String designation, String description, double prix, int quantite, boolean selectionne,
-			String photo) {
+			byte[] photo, Categorie cat, Admin admin) {
 		super();
 		this.id = id;
 		this.designation = designation;
@@ -75,9 +81,12 @@ public class Produit implements Serializable {
 		this.quantite = quantite;
 		this.selectionne = selectionne;
 		this.photo = photo;
+		this.cat = cat;
+		this.admin = admin;
 	}
 
 	
+
 	//GETTERS ET SETTERS
 	
 
@@ -85,6 +94,7 @@ public class Produit implements Serializable {
 	public String getDesignation() {
 		return designation;
 	}
+
 
 	public Long getId() {
 		return id;
@@ -130,13 +140,14 @@ public class Produit implements Serializable {
 		this.selectionne = selectionne;
 	}
 
-	public String getPhoto() {
+	public byte[] getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(String photo) {
+	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
+
 	public Categorie getCat() {
 		return cat;
 	}

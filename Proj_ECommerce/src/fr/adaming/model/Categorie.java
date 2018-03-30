@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -25,7 +26,7 @@ public class Categorie implements Serializable {
 	@Column(name="id_cat")
 	private  Long id;
 	private String nomCategorie;
-	private byte[] photo;
+	private @Lob byte[] photo;
 	private String description;
 	
 	
@@ -54,6 +55,8 @@ public class Categorie implements Serializable {
 	}
 	
 	
+
+
 
 
 	//CONSTRUCTEURS AVEC ID
