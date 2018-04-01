@@ -66,13 +66,18 @@ public class ProduitDaoImpl implements IProduitDao {
 
 	@Override
 	public int deleteProduit(Produit prod) {
-		Produit pdOut = em.find(Produit.class, prod.getId());
+		// creation de la requete :
+				String req3 = "DELETE FROM Produit WHERE prod.id=:pProdId";
 
-		em.remove(pdOut);
+				// creation du query :
+				Query query3 = em.createQuery(req3);
 
-		em.find(Produit.class, prod.getId());
+				// passage des parametres :
+				query3.setParameter("pProdId", prod.getId());
 
-		return 0;
+				// envoyer la requete et recuperer le resultat :
+				return (int) query3.executeUpdate();
+				
 	}
 
 	@Override

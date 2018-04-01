@@ -95,8 +95,7 @@ public class CategorieManagedBean implements Serializable {
 
 		} else {
 
-			FacesContext.getCurrentInstance().addMessage(null, new
-			 FacesMessage("L'ajout de la categorie a échoué"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout de la categorie a échoué"));
 
 			return "ajoutCat";
 		}
@@ -115,8 +114,27 @@ public class CategorieManagedBean implements Serializable {
 		} else {
 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec modification"));
-			
+
 			return "modifCat";
+		}
+	}
+
+	public String supprimerCat() {
+
+		int verif = categorieService.deleteCategorie(categorie);
+
+		if (verif != 0) {
+
+			List<Categorie> listecat = categorieService.getlisteCategorie();
+
+			maSession.setAttribute("categorieListe", listecat);
+
+			return "listeAdmin";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec suppression"));
+
+			return "suppCat";
+
 		}
 	}
 }

@@ -127,4 +127,24 @@ public class ProduitManagedBean implements Serializable {
 			return "modifProd";
 		}
 	}
+	
+	
+	public String supprimerProd(){
+		
+		int verif=produitService.deleteProduit(produit);
+		
+		if(verif!=0){
+			
+			List<Produit> listeprod=produitService.getlisteProduit();
+			
+			maSession.setAttribute("produitListe",listeprod);
+			
+			return "listeAdmin";
+		}else{
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec suppression"));
+			
+			return "suppProd";
+			
+		}
+	}
 }
