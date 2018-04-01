@@ -22,21 +22,40 @@ public class LigneCommande implements Serializable {
 	private Long id_ligne;
 	private int quantite;
 	private double prix;
+	
+	// Transformer l'association UML en java
+	@ManyToOne
+	@JoinColumn(name = "p_id", referencedColumnName = "id_p")
+	private Produit produit;
+	
+	@ManyToOne
+	@JoinColumn(name = "co_id", referencedColumnName = "id_co")
+	private Commande commande;
 
 	// Declaration des constructeurs
 	public LigneCommande() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public LigneCommande(int quantite) {
+		super();
+		this.quantite = quantite;
+	}
 
-	// Transformer l'association UML en java
-	@ManyToOne
-	@JoinColumn(name = "p_id", referencedColumnName = "id_p")
-	private Produit produit;
-
-	@ManyToOne
-	@JoinColumn(name = "co_id", referencedColumnName = "id_co")
-	private Commande commande;
+	public LigneCommande(Long id_ligne, int quantite) {
+		super();
+		this.id_ligne = id_ligne;
+		this.quantite = quantite;
+	}
+	
+	public LigneCommande(int quantite, double prix, Produit produit) {
+		// pour l'administrateur seulement
+		super();
+		this.quantite = quantite;
+		this.prix = prix;
+		this.produit = produit;
+	}
 
 	// Declaration des getters et setters
 	public LigneCommande(int quantite, double prix) {
