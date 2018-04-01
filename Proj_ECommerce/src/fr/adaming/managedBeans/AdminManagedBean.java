@@ -73,15 +73,11 @@ public class AdminManagedBean implements Serializable {
 	public String seConnecter() {
 		try {
 			Admin aOut = adminService.isExist(admin);
-			this.listeCategorie = categorieService.getlisteCategorie(aOut);
-			this.listeProduits = produitService.getlisteProduit(aOut);
+			
 
 			// ajouter l'admin et la liste comme attribut de la session
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adminSession", aOut);
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("categorieListe",
-					this.listeCategorie);
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("produitsListe",
-					this.listeProduits);
+		
 
 			return "succes";
 

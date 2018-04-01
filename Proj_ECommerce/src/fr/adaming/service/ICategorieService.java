@@ -11,7 +11,7 @@ import fr.adaming.model.Categorie;
 @Local
 public interface ICategorieService {
 	
-	public List<Categorie> getlisteCategorie(Admin admin);
+	public List<Categorie> getlisteCategorie();
 	
 	public Categorie addCategorie(Categorie cat);
 	

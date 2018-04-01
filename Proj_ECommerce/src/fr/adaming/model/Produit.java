@@ -43,10 +43,7 @@ public class Produit implements Serializable {
 	@JoinColumn(name="cat_id", referencedColumnName="id_cat")
 	private Categorie cat;
 	
-	
-	@ManyToOne
-	@JoinColumn(name="ad_id",referencedColumnName="id_ad")
-	private Admin admin;
+
 	
 	
 	//CONSTRUCTEURS VIDE
@@ -157,13 +154,7 @@ public class Produit implements Serializable {
 	}
 	
 
-	public Admin getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
-	}
+	
 	
 	//TOSTRING
 	@Override

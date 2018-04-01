@@ -18,9 +18,9 @@ public class CategorieServiceImpl implements ICategorieService {
 	private ICategorieDao catDao;
 
 	@Override
-	public List<Categorie> getlisteCategorie(Admin admin) {
+	public List<Categorie> getlisteCategorie() {
 
-		return catDao.getlisteCategorie(admin);
+		return catDao.getlisteCategorie();
 	}
 
 	@Override

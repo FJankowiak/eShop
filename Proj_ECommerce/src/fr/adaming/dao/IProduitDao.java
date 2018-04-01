@@ -17,7 +17,7 @@ public interface IProduitDao {
 	
 	// CONSULTER TOUS LES  PRODUITS
 	
-	List<Produit> getlisteProduit(Admin admin);
+	List<Produit> getlisteProduit();
 	
 	
 	
@@ -30,7 +30,10 @@ public interface IProduitDao {
 	
 	public int deleteProduit(Produit prod);
 
-	public int rechercherProduit(Produit id_prod);
+	//RECHERCHER UN PRODUIT
+	
+		public Produit rechercherProduit(Long id);
+
 }
 
 //rechercher produit

@@ -20,8 +20,8 @@ public class ProduitServiceImpl implements IProduitService {
 	
 	
 	@Override
-	public Produit addProduit(Produit prod,Admin admin) {
-		prod.setAdmin(admin);
+	public Produit addProduit(Produit prod) {
+		
 		
 		
 		return prodDao.addProduit(prod);
@@ -29,15 +29,15 @@ public class ProduitServiceImpl implements IProduitService {
 	
 	// CONSULTER TOUS LES  PRODUITS
 	@Override
-	public List<Produit> getlisteProduit(Admin admin) {
+	public List<Produit> getlisteProduit() {
 		
-		return prodDao.getlisteProduit(admin);
+		return prodDao.getlisteProduit();
 	}
 	
 	//MODIIFER UN PRODUIT
 	@Override
-	public int updateProduit(Produit prod,Admin admin,Categorie cat) {
-		prod.setAdmin(admin);
+	public int updateProduit(Produit prod,Categorie cat) {
+	
 		
 	
 		return prodDao.updateProduit(prod,cat);
@@ -45,9 +45,14 @@ public class ProduitServiceImpl implements IProduitService {
 
 	//SUPPRIMER UN PRODUIT
 	@Override
-	public int deleteProduit(Produit prod,Admin admin) {
-		prod.setAdmin(admin);
+	public int deleteProduit(Produit prod) {
+		
 		return 0;
+	}
+
+	@Override
+	public Produit rechercherProduit(Long id_prod) {
+		return prodDao.rechercherProduit(id_prod);
 	}
 
 }

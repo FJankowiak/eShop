@@ -12,7 +12,7 @@ public interface ICategorieDao {
 	
 	
 	// CONSULTER TOUS LES CATEGORIES
-	public List<Categorie> getlisteCategorie(Admin admin);
+	public List<Categorie> getlisteCategorie();
 	
 	// AJOUTER UNE CATEGORIE
 	

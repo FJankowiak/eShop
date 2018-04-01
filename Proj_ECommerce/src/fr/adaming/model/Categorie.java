@@ -45,9 +45,7 @@ public class Categorie implements Serializable {
 	@OneToMany(mappedBy="cat")
 	private List<Produit> listeProduit;
 	
-	@ManyToOne
-	@JoinColumn(name="ad_id",referencedColumnName="id_ad")
-	private Admin admin;
+
 
 
 

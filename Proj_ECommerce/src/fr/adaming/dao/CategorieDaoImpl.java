@@ -22,18 +22,18 @@ public class CategorieDaoImpl implements ICategorieDao{
 	//RECUPERER LA LISTE DES CATEGORIE
 	
 	@Override
-	public List<Categorie> getlisteCategorie(Admin admin) {
+	public List<Categorie> getlisteCategorie() {
 		
 		//REQUETE JPQL
 		
 		
-		String req="SELECT  cat FROM Categorie cat WHERE cat.admin.id=:pId";
+	String req="SELECT  cat FROM Categorie cat AS prod";
 		
 		//CREER UN OBJET QUERY POUR ENVOYER LA REQUETE JPQL
 		
 		Query query=em.createQuery(req);
 		
-		query.setParameter("pId",admin.getId());
+	
 		//ENVOYER LA REQUETE ET RECUPERER LE RESULTAT DE LA LISTE		
 		return query.getResultList();
 	}

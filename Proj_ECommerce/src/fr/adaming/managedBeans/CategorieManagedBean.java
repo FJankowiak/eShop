@@ -86,7 +86,7 @@ public class CategorieManagedBean implements Serializable {
 
 			// RECUP LA LISTE
 
-			List<Categorie> listeCat = categorieService.getlisteCategorie(admin);
+			List<Categorie> listeCat = categorieService.getlisteCategorie();
 
 			maSession.setAttribute("categorieListe", listeCat);
 

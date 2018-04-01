@@ -27,12 +27,9 @@ public class Admin implements Serializable{
 	private String mail;
 	private String mdp;
 	
-	// Tranformation association UML en Java
-	@OneToMany(mappedBy="admin")
-	private List<Produit> listeProduits;
 	
-	@OneToMany(mappedBy="admin")
-	private List<Categorie> listeCategorie;
+	
+	
 	
 	// Declaration des constructeurs
 	public Admin() {
@@ -77,14 +74,7 @@ public class Admin implements Serializable{
 	public void setMdp(String mdp) {
 		this.mdp = mdp;
 	}
-	
-	public List<Produit> getListeProduits() {
-		return listeProduits;
-	}
 
-	public void setListeProduits(List<Produit> listeProduits) {
-		this.listeProduits = listeProduits;
-	}
 	
 	
 

@@ -87,13 +87,13 @@ public class ProduitManagedBean implements Serializable {
 
 		// APPEL DE LA METHODE AJOUTER
 
-		Produit prodOut = produitService.addProduit(produit, admin);
+		Produit prodOut = produitService.addProduit(produit);
 
 		if (prodOut.getId() != 0) {
 
 			// RECUPERER LA NOUVELLE LISTE DE PRODUIT
 
-			List<Produit> listeprod = produitService.getlisteProduit(admin);
+			List<Produit> listeprod = produitService.getlisteProduit();
 
 			// METTRE A JOUR LA LISTE
 

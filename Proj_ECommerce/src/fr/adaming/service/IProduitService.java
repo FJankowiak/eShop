@@ -14,22 +14,26 @@ public interface IProduitService {
 
 	// AJOUTER UN PRODUIT
 
-	public Produit addProduit(Produit prod,Admin admin);
+	public Produit addProduit(Produit prod);
 	
 	// CONSULTER TOUS LES  PRODUITS
 	
-	List<Produit> getlisteProduit(Admin admin);
+	List<Produit> getlisteProduit();
 	
 	
 	
 	//MODIIFER UN PRODUIT
 	
-	public int updateProduit(Produit prod,Admin admin,Categorie cat);
+	public int updateProduit(Produit prod,Categorie cat);
 	
 	
 	//SUPPRIMER UN PRODUIT
 	
-	public int deleteProduit(Produit prod,Admin admin);
+	public int deleteProduit(Produit prod);
+	
+	//RECHERCHER UN PRODUIT
+	
+		public Produit rechercherProduit(Long id_prod);
 
 
 }
