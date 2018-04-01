@@ -18,13 +18,13 @@ public interface IProduitService {
 	
 	// CONSULTER TOUS LES  PRODUITS
 	
-	List<Produit> getlisteProduit();
+	List<Produit> getlisteProduit(Admin admin);
 	
 	
 	
 	//MODIIFER UN PRODUIT
 	
-	public int updateProduit(Produit prod,Admin admin);
+	public int updateProduit(Produit prod,Admin admin,Categorie cat);
 	
 	
 	//SUPPRIMER UN PRODUIT

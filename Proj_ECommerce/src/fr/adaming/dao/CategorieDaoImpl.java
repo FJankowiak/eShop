@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-
+import fr.adaming.model.Admin;
 import fr.adaming.model.Categorie;
 @Stateless
 public class CategorieDaoImpl implements ICategorieDao{
@@ -22,17 +22,18 @@ public class CategorieDaoImpl implements ICategorieDao{
 	//RECUPERER LA LISTE DES CATEGORIE
 	
 	@Override
-	public List<Categorie> getlisteCategorie() {
+	public List<Categorie> getlisteCategorie(Admin admin) {
 		
 		//REQUETE JPQL
 		
 		
-		String req="SELECT  Categorie cat FROM categories cat";
+		String req="SELECT  cat FROM Categorie cat WHERE cat.admin.id=:pId";
 		
 		//CREER UN OBJET QUERY POUR ENVOYER LA REQUETE JPQL
 		
 		Query query=em.createQuery(req);
 		
+		query.setParameter("pId",admin.getId());
 		//ENVOYER LA REQUETE ET RECUPERER LE RESULTAT DE LA LISTE		
 		return query.getResultList();
 	}

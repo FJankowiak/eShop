@@ -1,4 +1,4 @@
-package fr.adaming.dao;
+	package fr.adaming.dao;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import fr.adaming.model.Admin;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
@@ -19,41 +20,40 @@ public class ProduitDaoImpl implements IProduitDao{
 	@PersistenceContext(name="PU")
 	private EntityManager em;
 	
-	//AJOUTER UN PRODUIT
-	@Override
-	public Produit addProduit(Produit prod) {
 	
-		em.persist(prod);
-		
-		return prod;
-	}
-
 	@Override
-	public List<Produit> getlisteProduit() {
+	public List<Produit> getlisteProduit(Admin admin) {
 		
 		//REQUETE JPQL
 		
-		String req="SELECT prod FROM Produit prod ";
+		String req="SELECT prod FROM Produit prod WHERE prod.admin.id=:pId";
 		
 		//CREER UN OBJET QUERY POUR ENVOYER LA REQUETE JPQL
 		
 		Query query=em.createQuery(req);
 		
-		
-		
-	
-		//ENVOYER LA REQUETE ET RECUPERER LE RESULTAT DE LA LISTE
-		List<Produit> prl = query.getResultList();
-		System.out.println(prl);
+		query.setParameter("pId",admin.getId());
 				
-		return prl;
+				
+		return  query.getResultList();
 	}
 	
+	
+	//AJOUTER UN PRODUIT
+	@Override
+	public Produit addProduit(Produit prod) {
+	
+	em.persist(prod);
+	return prod ;
+		
+	}
+
+
 	
 	// MODIFIER UN PRODUIT
 
 	@Override
-	public int updateProduit(Produit prod) {
+	public int updateProduit(Produit prod,Categorie cat) {
 		//REQUETE JPQL 
 		String req1="SELECT Produit prod SET prod.designation=:pDesignation, prod.description=:pDescription, prod.prix=:pPrix,prod.quantite=:pQuantite, prod.selectionne=:pSelectionne, prod.photo=:pPhoto WHERE prod.id=:pProdId ";
 		
@@ -81,6 +81,13 @@ public class ProduitDaoImpl implements IProduitDao{
 		
 		em.find(Produit.class,prod.getId());
 
+		return 0;
+	}
+
+
+	@Override
+	public int rechercherProduit(Produit id_prod) {
+		
 		return 0;
 	}
 	

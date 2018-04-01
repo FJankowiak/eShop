@@ -9,7 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,14 +21,22 @@ import javax.persistence.Table;
 public class Categorie implements Serializable {
 	
 	
-	//DECLARATION DES ATTRIBUTS
 	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
+	//DECLARATION DES ATTRIBUTS
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_cat")
 	private  Long id;
 	private String nomCategorie;
-	private @Lob byte[] photo;
+	@Lob
+	private  byte[] photo;
 	private String description;
 	
 	
@@ -35,6 +45,9 @@ public class Categorie implements Serializable {
 	@OneToMany(mappedBy="cat")
 	private List<Produit> listeProduit;
 	
+	@ManyToOne
+	@JoinColumn(name="ad_id",referencedColumnName="id_ad")
+	private Admin admin;
 
 
 

@@ -29,8 +29,11 @@ public class Produit implements Serializable {
 	private String description;
 	private double prix;
 	private int quantite;
+	
+	@Column(columnDefinition="TINYINT(1)")
 	private boolean selectionne;
-	private @Lob byte[] photo;
+	@Lob
+	private  byte[] photo;
 	
 	
 	//TRANSFORMATION DE L'ASSOCIATION EN UML EN JAVA

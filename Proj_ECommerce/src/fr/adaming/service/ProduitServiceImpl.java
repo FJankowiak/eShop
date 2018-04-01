@@ -21,26 +21,26 @@ public class ProduitServiceImpl implements IProduitService {
 	
 	@Override
 	public Produit addProduit(Produit prod,Admin admin) {
-		
 		prod.setAdmin(admin);
+		
 		
 		return prodDao.addProduit(prod);
 	}
 	
 	// CONSULTER TOUS LES  PRODUITS
 	@Override
-	public List<Produit> getlisteProduit() {
+	public List<Produit> getlisteProduit(Admin admin) {
 		
-		return prodDao.getlisteProduit();
+		return prodDao.getlisteProduit(admin);
 	}
 	
 	//MODIIFER UN PRODUIT
 	@Override
-	public int updateProduit(Produit prod,Admin admin) {
+	public int updateProduit(Produit prod,Admin admin,Categorie cat) {
 		prod.setAdmin(admin);
 		
 	
-		return prodDao.updateProduit(prod);
+		return prodDao.updateProduit(prod,cat);
 	}
 
 	//SUPPRIMER UN PRODUIT

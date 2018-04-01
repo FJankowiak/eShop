@@ -13,38 +13,38 @@
 <h:body>
 
 <p:breadCrumb>
-    <p:menuitem value="Tableau Administrateur" url="listesAdmin.xhtml" />
+    <p:menuitem value="Tableau Administrateur" url="listesAdmin.xhtml"/>
     <p:menuitem value="Ajouter" url="ajoutProd.xhtml" />
     
 </p:breadCrumb>
 
-<p:dataTable var="pd" value="#{sessionScope.listeProduits}">
+<p:dataTable var="pd" value="#{sessionScope.produitsListe}">
     <p:column headerText="Id">
-        <h:outputText value="#{pd.id}" />
+        <h:outputText value="#{pd.id}"/>
     </p:column>
  
     <p:column headerText="designation">
-        <h:outputText value="#{pd.designation}" />
+        <h:outputText value="#{pd.designation}"/>
     </p:column>
  
     <p:column headerText="Description">
-        <h:outputText value="#{pd.description}" />
+        <h:outputText value="#{pd.description}"/>
     </p:column>
  
     <p:column headerText="Prix">
-        <h:outputText value="#{pd.prix}" />
+        <h:outputText value="#{pd.prix}"/>
     </p:column>
     
       <p:column headerText="Quantite">
-        <h:outputText value="#{pd.quantite}" />
+        <h:outputText value="#{pd.quantite}"/>
     </p:column>
     
       <p:column headerText="Selectionné">
-        <h:outputText value="#{pd.selectionne}" />
+        <h:outputText value="#{pd.selectionne}"/>
     </p:column>
     
       <p:column headerText="Photo">
-        <h:outputText value="#{pd.photo}" />
+        <h:outputText value="#{pd.photo}"/>
     </p:column>
 </p:dataTable>
 

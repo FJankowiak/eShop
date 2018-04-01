@@ -6,7 +6,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
 import fr.adaming.dao.ICategorieDao;
-
+import fr.adaming.model.Admin;
 import fr.adaming.model.Categorie;
 
 @Stateful
@@ -18,9 +18,9 @@ public class CategorieServiceImpl implements ICategorieService {
 	private ICategorieDao catDao;
 
 	@Override
-	public List<Categorie> getlisteCategorie() {
+	public List<Categorie> getlisteCategorie(Admin admin) {
 
-		return catDao.getlisteCategorie();
+		return catDao.getlisteCategorie(admin);
 	}
 
 	@Override

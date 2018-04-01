@@ -4,48 +4,24 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
 	version="2.2">
 
-	<!-- déclaration du managedBean pour que le conteneur web le reconnaisse -->
-<!-- 	<managed-bean> -->
-<!-- 		<managed-bean-name>clMB</managed-bean-name> -->
-<!-- 		<managed-bean-class>fr.adaming.managedBeans.ClientManagedBean</managed-bean-class> -->
-<!-- 		<managed-bean-scope>request</managed-bean-scope> -->
 
-<!-- 	</managed-bean> -->
-
-<!-- 	<managed-bean> -->
-<!-- 		<managed-bean-name>aMB</managed-bean-name> -->
-<!-- 		<managed-bean-class>fr.adaming.managedBeans.AdminManagedBean</managed-bean-class> -->
-<!-- 		<managed-bean-scope>request</managed-bean-scope> -->
-
-<!-- 	</managed-bean> -->
-
-<!-- 	<managed-bean> -->
-<!-- 		<managed-bean-name>catMB</managed-bean-name> -->
-<!-- 		<managed-bean-class>fr.adaming.managedBeans.CategorieManagedBean</managed-bean-class> -->
-<!-- 		<managed-bean-scope>request</managed-bean-scope> -->
-
-<!-- 	</managed-bean> -->
-
-<!-- 	<managed-bean> -->
-<!-- 		<managed-bean-name>prMB</managed-bean-name> -->
-<!-- 		<managed-bean-class>fr.adaming.managedBeans.ProduitManagedBean</managed-bean-class> -->
-<!-- 		<managed-bean-scope>request</managed-bean-scope> -->
-
-<!-- 	</managed-bean> -->
-
-	<managed-bean>
-		<managed-bean-name>lcMB</managed-bean-name>
-		<managed-bean-class>fr.adaming.managedBeans.LigneCommandeManagedBean</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-
-	</managed-bean>
-
-	<managed-bean>
-		<managed-bean-name>coMB</managed-bean-name>
-		<managed-bean-class>fr.adaming.managedBeans.CommandeManagedBean</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-
-	</managed-bean>
-
+ <navigation-rule>
+    
+    <from-view-id>/loginAdmin.xhtml</from-view-id>
+    
+    <navigation-case>
+    
+    <from-outcome>succes</from-outcome>
+    <to-view-id>/listesAdmin.xhtml</to-view-id>
+    </navigation-case>
+    
+     <navigation-case>
+    
+    <from-outcome>echec</from-outcome>
+    <to-view-id>/loginAdmin.xhtml</to-view-id>
+    </navigation-case>
+    
+    
+    </navigation-rule>
 
 </faces-config>

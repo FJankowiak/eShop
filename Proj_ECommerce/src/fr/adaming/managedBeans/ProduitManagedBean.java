@@ -29,7 +29,6 @@ public class ProduitManagedBean implements Serializable {
 	IProduitService produitService;
 
 	// DECLARATION DES ATTRIBUTS DU ENVOYER A LA PAGE
-	
 
 	private Produit produit;
 	private Admin admin;
@@ -39,7 +38,8 @@ public class ProduitManagedBean implements Serializable {
 	// CONSTRUCTEUR VIDE
 	public ProduitManagedBean() {
 		this.produit = new Produit();
-		this.admin=new Admin();
+		this.admin = new Admin();
+		this.cat = new Categorie();
 
 	}
 
@@ -48,14 +48,11 @@ public class ProduitManagedBean implements Serializable {
 	@PostConstruct
 	public void init() {
 
-		// RECUPERER LA SESSION 
+		// RECUPERER LA SESSION
 
 		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-	
 
 	}
-
-	
 
 	// GETTERS ET SETTERS
 	public Produit getProduit() {
@@ -65,6 +62,7 @@ public class ProduitManagedBean implements Serializable {
 	public void setProduit(Produit produit) {
 		this.produit = produit;
 	}
+
 	public Admin getAdmin() {
 		return admin;
 	}
@@ -72,7 +70,6 @@ public class ProduitManagedBean implements Serializable {
 	public void setAdmin(Admin admin) {
 		this.admin = admin;
 	}
-	
 
 	public Categorie getCat() {
 		return cat;
@@ -81,52 +78,35 @@ public class ProduitManagedBean implements Serializable {
 	public void setCat(Categorie cat) {
 		this.cat = cat;
 	}
-	
-	
-	
+
 	// METHODES
 
-	
-	
-	//AFFICHER LA LISTE DES PRODUITS
-	
+	// AJOUTER UN PRODUIT
 
-	public Produit afficheListProd(){
-		
-		return produit;
-	}
-	
-	
-	//AJOUTER UN PRODUIT
-	
+	public String ajouterProd() {
 
+		// APPEL DE LA METHODE AJOUTER
 
-	public String ajouterProd(){
-		
-		//APPEL DE LA METHODE AJOUTER
-		
-		Produit prodOut=produitService.addProduit(produit,admin);
-		
-		if(prodOut.getId()!=0){
-			
-			//RECUPERER LA NOUVELLE LISTE DE PRODUIT
-			
-			List<Produit> listeprod=produitService.getlisteProduit();
-			
-			//METTRE A JOUR LA LISTE
-			
-			 maSession.setAttribute("listeProduits", listeprod);
-			 
-			 
-			 return "listesAdmin";
-			
-		}else{
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout du produit a échoué"));
-			return"ajoutProd";
+		Produit prodOut = produitService.addProduit(produit, admin);
+
+		if (prodOut.getId() != 0) {
+
+			// RECUPERER LA NOUVELLE LISTE DE PRODUIT
+
+			List<Produit> listeprod = produitService.getlisteProduit(admin);
+
+			// METTRE A JOUR LA LISTE
+
+			maSession.setAttribute("produitsListe", listeprod);
+
+			return "listesAdmin";
+
+		} else {
+
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec ajout"));
+
+			return "ajoutProd";
 		}
 	}
-	
-	
-	
 
 }

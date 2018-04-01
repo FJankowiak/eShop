@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import fr.adaming.model.Admin;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
@@ -16,17 +17,24 @@ public interface IProduitDao {
 	
 	// CONSULTER TOUS LES  PRODUITS
 	
-	List<Produit> getlisteProduit();
+	List<Produit> getlisteProduit(Admin admin);
 	
 	
 	
 	//MODIIFER UN PRODUIT
 	
-	public int updateProduit(Produit prod);
+	public int updateProduit(Produit prod, Categorie cat);
 	
 	
 	//SUPPRIMER UN PRODUIT
 	
 	public int deleteProduit(Produit prod);
 
+	public int rechercherProduit(Produit id_prod);
 }
+
+//rechercher produit
+
+
+
+

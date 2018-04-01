@@ -14,6 +14,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "admins")
 public class Admin implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Declaration des attributs
 	
 	@Id
@@ -26,6 +30,9 @@ public class Admin implements Serializable{
 	// Tranformation association UML en Java
 	@OneToMany(mappedBy="admin")
 	private List<Produit> listeProduits;
+	
+	@OneToMany(mappedBy="admin")
+	private List<Categorie> listeCategorie;
 	
 	// Declaration des constructeurs
 	public Admin() {
