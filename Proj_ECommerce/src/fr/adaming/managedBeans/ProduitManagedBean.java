@@ -103,10 +103,28 @@ public class ProduitManagedBean implements Serializable {
 
 		} else {
 
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec ajout"));
+			//FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec ajout"));
 
 			return "ajoutProd";
 		}
 	}
 
+	
+	public String modifierProd(){
+		int verif=produitService.updateProduit(produit);
+		
+		if(verif!=0){
+			
+			List<Produit> listeprod=produitService.getlisteProduit();
+			
+			maSession.setAttribute("produitListe",listeprod);
+			
+			return "listeAdmin";
+		}else{
+			
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec modification"));
+			
+			return "modifProd";
+		}
+	}
 }

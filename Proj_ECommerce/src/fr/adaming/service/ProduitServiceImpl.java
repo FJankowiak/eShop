@@ -36,11 +36,11 @@ public class ProduitServiceImpl implements IProduitService {
 	
 	//MODIIFER UN PRODUIT
 	@Override
-	public int updateProduit(Produit prod,Categorie cat) {
+	public int updateProduit(Produit prod) {
 	
 		
 	
-		return prodDao.updateProduit(prod,cat);
+		return prodDao.updateProduit(prod);
 	}
 
 	//SUPPRIMER UN PRODUIT

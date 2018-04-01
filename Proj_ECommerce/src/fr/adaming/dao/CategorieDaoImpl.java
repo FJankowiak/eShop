@@ -27,7 +27,7 @@ public class CategorieDaoImpl implements ICategorieDao{
 		//REQUETE JPQL
 		
 		
-	String req="SELECT  cat FROM Categorie cat AS prod";
+	String req="SELECT cat FROM Categorie  AS cat";
 		
 		//CREER UN OBJET QUERY POUR ENVOYER LA REQUETE JPQL
 		

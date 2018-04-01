@@ -12,9 +12,8 @@
 <h:body>
 
 	<p:breadCrumb>
-		<p:menuitem value="Tableau Administrateur" url="accueil.xhtml" />
-		<p:menuitem value="Ajouter" url="ajoutProd.xhtml" />
-		<p:menuitem value="Ajouter" url="ajoutProd.xhtml" />
+		<p:menuitem value="Accueil" url="accueil.xhtml" />
+		
 
 	</p:breadCrumb>
 	
@@ -22,34 +21,43 @@
 	<h1 style="color: red; text-align: center">Liste des catégories</h1>
 	<h:form>
 	
-<p:commandButton value="Connexion admin" action="#{aMB.seConnecter}" />
+
+
 	
 
 		<p:dataTable var="pr" value="#{sessionScope.produitsListe}">
 			<p:column headerText="ID">
-				<h:outputText value="#{pr.produit.id}" />
+				<h:outputText value="#{pr.produit.id}"/>
 			</p:column>
 
 			<p:column headerText="Designation">
-				<h:outputText value="#{pr.produit.designation}" />
+				<h:outputText value="#{pr.produit.designation}"/>
 			</p:column>
 
 			<p:column headerText="prix">
-				<h:outputText value="{pr.produit.prix}" />
+				<h:outputText value="{pr.produit.prix}"/>
 			</p:column>
 
 			<p:column headerText="Quantité">
-				<h:outputText value="{pr.produit.quantite}" />
+				<h:outputText value="{pr.produit.quantite}"/>
 			</p:column>
 
 			<p:column headerText="Selectionné">
-				<h:outputText value="{pr.produit.selectionne}" />
+				<h:outputText value="{pr.produit.selectionne}"/>
 			</p:column>
 
 		</p:dataTable>
 
 	</h:form>
+<h:form>
+		<h:panelGrid columns="2">
+			 Mail : <h:inputText value = "#{aMB.admin.mail}"/>
+			 Mot de passe : <h:inputSecret value="#{aMB.admin.mdp}"/>
+			<h:commandButton value="Se connecter" action="#{aMB.seConnecter}"/>
+		</h:panelGrid>
 
+
+	</h:form>
 
 
 </h:body>

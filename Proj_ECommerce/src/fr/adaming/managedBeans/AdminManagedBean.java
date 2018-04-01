@@ -71,21 +71,27 @@ public class AdminManagedBean implements Serializable {
 	}
 
 	public String seConnecter() {
-		try {
-			Admin aOut = adminService.isExist(admin);
-			
+
+		Admin aOut = adminService.isExist(admin);
+
+		if (aOut != null) {
+
+			this.listeProduits = produitService.getlisteProduit();
+			this.listeCategorie = categorieService.getlisteCategorie();
+
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("produitListe", listeProduits);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("categorieListe",
+					listeCategorie);
 
 			// ajouter l'admin et la liste comme attribut de la session
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adminSession", aOut);
-		
 
-			return "succes";
+			return "listesAdmin";
 
-		} catch (Exception ex) {
-			FacesContext.getCurrentInstance().addMessage("erreur", new FacesMessage("Authentification impossible"));
+		} else {
+
+			return "accueil";
 		}
-
-		return "echec";
 
 	}
 
@@ -93,7 +99,7 @@ public class AdminManagedBean implements Serializable {
 		// fermer la session ouverte
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 
-		return "echec";
+		return "accueil";
 	}
 
 }

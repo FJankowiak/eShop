@@ -9,6 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.management.ListenerNotFoundException;
 import javax.servlet.http.HttpSession;
 
 import fr.adaming.model.Admin;
@@ -38,7 +39,7 @@ public class CategorieManagedBean implements Serializable {
 	// CONSTRUCTEUR VIDE
 
 	public CategorieManagedBean() {
-		this.categorie=new Categorie();
+		this.categorie = new Categorie();
 	}
 
 	@PostConstruct
@@ -94,10 +95,28 @@ public class CategorieManagedBean implements Serializable {
 
 		} else {
 
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout de la categorie a échoué"));
+			FacesContext.getCurrentInstance().addMessage(null, new
+			 FacesMessage("L'ajout de la categorie a échoué"));
 
 			return "ajoutCat";
 		}
 	}
 
+	public String modifierCat() {
+		int verif = categorieService.updateCategorie(categorie);
+
+		if (verif != 0) {
+
+			List<Categorie> listeCat = categorieService.getlisteCategorie();
+
+			maSession.setAttribute("categorieListe", listeCat);
+
+			return "listeAdmin";
+		} else {
+
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec modification"));
+			
+			return "modifCat";
+		}
+	}
 }

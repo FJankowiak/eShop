@@ -17,6 +17,8 @@
 	<p:breadCrumb>
 		<p:menuitem value="Tableau Administrateur" url="listesAdmin.xhtml"/>
 		<p:menuitem value="Ajouter categorie" url="ajoutCat.xhtml"/>
+		<p:menuitem value="Modifier Produit" url="modifierProd.xhtml" />
+		<p:menuitem value="Modifier Produit" url="modifierCat.xhtml"/>
 
 	</p:breadCrumb>
 <h:form>
@@ -40,9 +42,9 @@
 
 
 
-			<p:commandButton value="Ajouter" action="#{catMb.ajouterCat}"/>
+			<p:commandButton value="Ajouter" actionListener="#{catMB.ajouterCat}"/>
 			
-			<h:message style="color:coral"/>
+			
 
 	</h:panelGrid>
 	</h:form>

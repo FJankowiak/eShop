@@ -43,9 +43,10 @@ public class ProduitDaoImpl implements IProduitDao {
 	// MODIFIER UN PRODUIT
 
 	@Override
-	public int updateProduit(Produit prod, Categorie cat) {
+	public int updateProduit(Produit prod) {
 		// REQUETE JPQL
-		String req1 = "SELECT Produit prod SET prod.designation=:pDesignation, prod.description=:pDescription, prod.prix=:pPrix,prod.quantite=:pQuantite, prod.selectionne=:pSelectionne, prod.photo=:pPhoto WHERE prod.id=:pProdId ";
+		String req1 = "SELECT Produit prod SET prod.designation=:pDesignation, prod.description=:pDescription, prod.prix=:pPrix,prod.quantite=:pQuantite, prod.selectionne=:pSelectionne, prod.photo=:pPhoto "
+				+ "WHERE prod.id=:pProdId ";
 
 		// CREER UN OBJET QUERY POUR ENVOYER LA REQUETE JPQL
 

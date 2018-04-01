@@ -23,7 +23,7 @@ public interface IProduitDao {
 	
 	//MODIIFER UN PRODUIT
 	
-	public int updateProduit(Produit prod, Categorie cat);
+	public int updateProduit(Produit prod);
 	
 	
 	//SUPPRIMER UN PRODUIT
