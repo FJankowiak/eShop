@@ -5,26 +5,32 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
+	
 <h:head>
-	<meta charset="ISO-8859-1" />
-	<title>Ajouter une categorie</title>
+<meta charset="ISO-8859-1" />
+<title>Ajouter une categorie</title>
 </h:head>
-
-
 <h:body>
 
-
-	<p:breadCrumb>
+<h:form>
+		<p:breadCrumb>
 		<p:menuitem value="Tableau Administrateur" url="listesAdmin.xhtml"/>
-		<p:menuitem value="Ajouter categorie" url="ajoutCat.xhtml"/>
-		<p:menuitem value="Modifier Produit" url="modifierProd.xhtml" />
-		<p:menuitem value="Modifier Produit" url="modifierCat.xhtml"/>
+		<p:menuitem value="Ajouter produit" url="ajoutProd.xhtml"/>
+		<p:menuitem value="Ajouter Categorie" url="ajoutCat.xhtml"/>
+		<p:menuitem value="Modifier Produit" url="modifierProd.xhtml"/>
+		<p:menuitem value="Modifier categorie" url="modifierCat.xhtml"/>
+		<p:menuitem value="supprimer categorie" url="suppCat.xhtml"/>
+		<p:menuitem value="supprimer prod" url="suppProd.xhtml"/>
 
 	</p:breadCrumb>
-<h:form>
+	</h:form>
+	
+	
+<h:form enctype="multipart/form-data">
+<h1>Formulaire d'ajout</h1>
 	<h:panelGrid columns="2">
 		<div class="form-group">
-			Designation:
+			Nom categorie:
 			<h:inputText value="#{catMB.categorie.nomCategorie}"/>
 
 		</div>
@@ -36,18 +42,24 @@
 		
 		<div>
 				Photo:
-				<p:graphicImage value="#{catMB.categorie.photo}"/>
+				<p:fileUpload value="#{catMB.uf}" mode="simple"/>
+				<p:graphicImage value="#{catMB.categorie.image}"/>
+		
+	
 
 			</div>
 
 
 
-			<p:commandButton value="Ajouter" actionListener="#{catMB.ajouterCat}"/>
+			<p:commandButton value="submit" ajax="false" action="#{catMB.ajouterCat}"/>
 			
 			
 
 	</h:panelGrid>
+
 	</h:form>
+	
+	<h:messages style="color:red"/>
 
 </h:body>
 </html>

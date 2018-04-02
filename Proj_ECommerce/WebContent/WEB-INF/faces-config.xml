@@ -5,23 +5,5 @@
 	version="2.2">
 
 
- <navigation-rule>
-    
-    <from-view-id>/loginAdmin.xhtml</from-view-id>
-    
-    <navigation-case>
-    
-    <from-outcome>succes</from-outcome>
-    <to-view-id>/listesAdmin.xhtml</to-view-id>
-    </navigation-case>
-    
-     <navigation-case>
-    
-    <from-outcome>echec</from-outcome>
-    <to-view-id>/loginAdmin.xhtml</to-view-id>
-    </navigation-case>
-    
-    
-    </navigation-rule>
 
 </faces-config>

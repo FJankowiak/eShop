@@ -9,8 +9,11 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.management.ListenerNotFoundException;
+
 import javax.servlet.http.HttpSession;
+
+import org.primefaces.model.UploadedFile;
+import org.primefaces.model.UploadedFileWrapper;
 
 import fr.adaming.model.Admin;
 import fr.adaming.model.Categorie;
@@ -36,10 +39,14 @@ public class CategorieManagedBean implements Serializable {
 	private Admin admin;
 	HttpSession maSession;
 
+
+	private UploadedFile uf;
+
 	// CONSTRUCTEUR VIDE
 
 	public CategorieManagedBean() {
 		this.categorie = new Categorie();
+		this.uf=new UploadedFileWrapper();
 	}
 
 	@PostConstruct
@@ -76,12 +83,23 @@ public class CategorieManagedBean implements Serializable {
 	public void setAdmin(Admin admin) {
 		this.admin = admin;
 	}
+	
+	public UploadedFile getUf() {
+		return uf;
+	}
+
+	public void setUf(UploadedFile uf) {
+		this.uf = uf;
+	}
 
 	// METHODES
 
 	public String ajouterCat() {
+		
+			
 
 		Categorie catOut = categorieService.addCategorie(categorie);
+		this.categorie.setPhoto(this.uf.getContents());
 
 		if (catOut.getId() != 0) {
 
@@ -100,6 +118,9 @@ public class CategorieManagedBean implements Serializable {
 			return "ajoutCat";
 		}
 	}
+	
+	
+	
 
 	public String modifierCat() {
 		int verif = categorieService.updateCategorie(categorie);
@@ -110,7 +131,7 @@ public class CategorieManagedBean implements Serializable {
 
 			maSession.setAttribute("categorieListe", listeCat);
 
-			return "listeAdmin";
+			return "listesAdmin";
 		} else {
 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec modification"));
@@ -129,7 +150,7 @@ public class CategorieManagedBean implements Serializable {
 
 			maSession.setAttribute("categorieListe", listecat);
 
-			return "listeAdmin";
+			return "listesAdmin";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec suppression"));
 
@@ -137,4 +158,9 @@ public class CategorieManagedBean implements Serializable {
 
 		}
 	}
+	
+	
+	
+	
+	
 }

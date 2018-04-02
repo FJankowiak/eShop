@@ -6,71 +6,89 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<title>Tableau de bord administrateurs</title>
+	<title>Tableau de bord administrateurs</title>
 
 </h:head>
 
 <h:body>
 
-<p:breadCrumb>
-    <p:menuitem value="Tableau Administrateur" url="listesAdmin.xhtml"/>
-    <p:menuitem value="Ajouter Produit" url="ajoutProd.xhtml"/>
-    <p:menuitem value="Ajouter categorie" url="ajoutCat.xhtml"/>
-    <p:menuitem value="Modifier Produit" url="modifierProd.xhtml"/>
-    <p:menuitem value="Modifier Produit" url="modifierCat.xhtml"/>
-    
-</p:breadCrumb>
+	<!-- inclure mon template avec des modifs -->
+	<!-- 	<ui:composition template="/template/layoutAdmin.xhtml"> -->
+	<!-- Modifier la partie corps -->
+	<!-- 		<ui:define name="corps"> -->
 
-<p:dataTable var="pd" value="#{sessionScope.listeproduits}">
-    <p:column headerText="Id">
-        <h:outputText value="#{pd.id}"/>
-    </p:column>
- 
-    <p:column headerText="designation">
-        <h:outputText value="#{pd.designation}"/>
-    </p:column>
- 
-    <p:column headerText="Description">
-        <h:outputText value="#{pd.description}"/>
-    </p:column>
- 
-    <p:column headerText="Prix">
-        <h:outputText value="#{pd.prix}"/>
-    </p:column>
-    
-      <p:column headerText="Quantite">
-        <h:outputText value="#{pd.quantite}"/>
-    </p:column>
-    
-      <p:column headerText="Selectionné">
-        <h:outputText value="#{pd.selectionne}"/>
-    </p:column>
-    
-      <p:column headerText="Photo">
-        <h:outputText value="#{pd.photo}"/>
-    </p:column>
-</p:dataTable>
-<br/>
-<h:form>
+	<h:form>
+		<p:breadCrumb>
+			<p:menuitem value="Tableau Administrateur" url="listesAdmin.xhtml" />
+			<p:menuitem value="Ajouter produit" url="ajoutProd.xhtml" />
+			<p:menuitem value="Ajouter Categorie" url="ajoutCat.xhtml" />
+			<p:menuitem value="Modifier Produit" url="modifierProd.xhtml" />
+			<p:menuitem value="Modifier categorie" url="modifierCat.xhtml" />
+			<p:menuitem value="supprimer categorie" url="suppCat.xhtml" />
+			<p:menuitem value="supprimer prod" url="suppProd.xhtml" />
 
-<p:dataTable var="ct" value="#{sessionScope.listeCategorie}">
-   <p:column headerText="Nom">
-        <h:outputText value="#{ct.nomCategorie}"/>
-    </p:column>
-    
-      <p:column headerText="Description">
-        <h:outputText value="#{ct.description}"/>
-    </p:column>
-    
-      <p:column headerText="Photo">
-        <h:outputText value="#{ct.photo}"/>
-    </p:column>
-</p:dataTable>
-<h:form>
+		</p:breadCrumb>
+	</h:form>
 
-</h:form>
-<h:commandButton value="Se déconnecter" action="#{aMB.seDeconnecter}"/>
-</h:form>
+	<h:form>
+		<h1>Liste des produits</h1>
+		<p:dataTable var="pd" value="#{sessionScope.produitListe}">
+			<p:column headerText="Id">
+				<h:outputText value="#{pd.id}" />
+			</p:column>
+
+			<p:column headerText="Designation">
+				<h:outputText value="#{pd.designation}" />
+			</p:column>
+
+			<p:column headerText="Description">
+				<h:outputText value="#{pd.description}" />
+			</p:column>
+
+			<p:column headerText="Prix">
+				<h:outputText value="#{pd.prix}" />
+			</p:column>
+
+			<p:column headerText="Quantite">
+				<h:outputText value="#{pd.quantite}" />
+			</p:column>
+
+			<p:column headerText="Selectionné">
+				<h:outputText value="#{pd.selectionne}" />
+			</p:column>
+
+			<p:column headerText="Photo">
+				<p:graphicImage value="#{pd.image}" />
+			</p:column>
+		</p:dataTable>
+
+	</h:form>
+
+	<br />
+
+
+	<h:form>
+		<h1>Liste des categories</h1>
+		<p:dataTable var="ct" value="#{sessionScope.categorieListe}">
+			<p:column headerText="Nom">
+				<h:outputText value="#{ct.nomCategorie}" />
+			</p:column>
+
+			<p:column headerText="Description">
+				<h:outputText value="#{ct.description}" />
+			</p:column>
+
+			<p:column headerText="Photo">
+				<p:graphicImage value="#{ct.image}" />
+			</p:column>
+		</p:dataTable>
+
+	</h:form>
+
+
+
+	<!-- 		</ui:define> -->
+	<!-- 	</ui:composition> -->
 
 
 </h:body>

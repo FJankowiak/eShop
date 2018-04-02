@@ -11,6 +11,9 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.primefaces.model.UploadedFile;
+import org.primefaces.model.UploadedFileWrapper;
+
 import fr.adaming.model.Admin;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
@@ -34,16 +37,18 @@ public class ProduitManagedBean implements Serializable {
 	private Admin admin;
 	private Categorie cat;
 	HttpSession maSession;
+	private UploadedFile uf;
 
 	// CONSTRUCTEUR VIDE
 	public ProduitManagedBean() {
 		this.produit = new Produit();
-		this.admin = new Admin();
-		this.cat = new Categorie();
+		this.uf=new UploadedFileWrapper();
 
 	}
 
 	// POUR QUE CETTE METHODE S'EXECUTE APRES L'INSTANCIATION DU MB
+
+
 
 	@PostConstruct
 	public void init() {
@@ -79,15 +84,28 @@ public class ProduitManagedBean implements Serializable {
 		this.cat = cat;
 	}
 
+	
+	public UploadedFile getUf() {
+		return uf;
+	}
+
+	public void setUf(UploadedFile uf) {
+		this.uf = uf;
+	}
 	// METHODES
 
 	// AJOUTER UN PRODUIT
 
 	public String ajouterProd() {
+		
+		
 
 		// APPEL DE LA METHODE AJOUTER
-
+		
+		
+		
 		Produit prodOut = produitService.addProduit(produit);
+		produit.setPhoto(this.uf.getContents());
 
 		if (prodOut.getId() != 0) {
 
@@ -97,7 +115,7 @@ public class ProduitManagedBean implements Serializable {
 
 			// METTRE A JOUR LA LISTE
 
-			maSession.setAttribute("produitsListe", listeprod);
+			maSession.setAttribute("produitListe", listeprod);
 
 			return "listesAdmin";
 
@@ -119,7 +137,7 @@ public class ProduitManagedBean implements Serializable {
 			
 			maSession.setAttribute("produitListe",listeprod);
 			
-			return "listeAdmin";
+			return "listesAdmin";
 		}else{
 			
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec modification"));
@@ -139,7 +157,7 @@ public class ProduitManagedBean implements Serializable {
 			
 			maSession.setAttribute("produitListe",listeprod);
 			
-			return "listeAdmin";
+			return "listesAdmin";
 		}else{
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec suppression"));
 			

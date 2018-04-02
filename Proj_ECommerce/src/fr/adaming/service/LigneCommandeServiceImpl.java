@@ -6,50 +6,51 @@ import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
 import fr.adaming.dao.ILigneCommandeDao;
+import fr.adaming.dao.IProduitDao;
 import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Produit;
 
 @Stateful
-public class LigneCommandeServiceImpl implements ILigneCommandeService{
+public class LigneCommandeServiceImpl implements ILigneCommandeService {
 	// Association UML en java
 	@EJB
 	private ILigneCommandeDao ligneCommandeDao;
 	@EJB
-	private IProduitService prodService;
-
+	private IProduitDao prodService;
 
 	@Override
-	public int ajouterLC(LigneCommande lc, int id_prod) {
-
+	public int updateLC(LigneCommande lc, Long id_prod) {
 		Produit produit = prodService.rechercherProduit(id_prod);
-		
-		if(produit != null){
+
+		if (produit != null) {
+
 			lc.setProduit(produit);
-			lc.setPrix(produit.getPrix());
-			
+			System.out.println("Je suis dans lignecommandeService");
+			System.out.println(produit);
+
 			LigneCommande lc2 = ligneCommandeDao.isExist(lc);
-			
-			if(lc2 == null){
+
+			if (lc2 != null) {
+				// Mettre à jour plutot que d'avoir un doublon
+				if (lc.getQuantite() == 0) {
+					System.out.println("Suppression");
+					return ligneCommandeDao.supprimerLC(lc2);
+				} else {
+					System.out.println("Mise à jour");
+					lc.setPrix(produit.getPrix() * lc.getQuantite());
+					return ligneCommandeDao.modifierLC(lc);
+				}
+			} else if (lc.getQuantite() != 0){
+				System.out.println("Ajout");
+				lc.setPrix(produit.getPrix() * lc.getQuantite());
 				return ligneCommandeDao.ajouterLC(lc);
 			} else {
-				// mettre à jou plutôt que d'avoir un doublon
-				this.modifierLC(lc);
+				System.out.println("Nada");
 			}
+
 		}
-		
 		return 0;
 	}
-
-	@Override
-	public int supprimerLC(LigneCommande lc) {
-		return ligneCommandeDao.supprimerLC(lc);
-	}
-
-	@Override
-	public int modifierLC(LigneCommande lc) {
-		return ligneCommandeDao.modifierLC(lc);
-	}
-
 	@Override
 	public List<LigneCommande> getLigneCommande() {
 		return ligneCommandeDao.getLigneCommande();

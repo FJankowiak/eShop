@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 @Entity
 @Table(name="produits")
 public class Produit implements Serializable {
@@ -34,11 +35,17 @@ public class Produit implements Serializable {
 	private boolean selectionne;
 	@Lob
 	private  byte[] photo;
+	@Transient
+	private String image;
 	
 	
 	//TRANSFORMATION DE L'ASSOCIATION EN UML EN JAVA
 	
 	
+
+
+
+
 	@ManyToOne
 	@JoinColumn(name="cat_id", referencedColumnName="id_cat")
 	private Categorie cat;
@@ -88,6 +95,13 @@ public class Produit implements Serializable {
 
 	//GETTERS ET SETTERS
 	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
 
 	public Long getId() {
 		return id;
