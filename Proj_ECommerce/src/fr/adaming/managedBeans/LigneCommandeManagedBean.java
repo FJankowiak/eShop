@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
 import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Produit;
@@ -63,8 +64,22 @@ public class LigneCommandeManagedBean implements Serializable {
 	}
 
 	// Méthodes
-	public String ajouterLC(){
-		int verif = lcService.ajouterLC(lCommande, id_prod);
+	@PostConstruct
+	public void init() {
+		// RECUPERER LA SESSION
+		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		List<LigneCommande> lcListe = lcService.getLigneCommande();
+		System.out.println(lcListe);
+//		maSession.setAttribute("panier", lcListe);
+
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("panier", lcListe);
+
+	}
+	
+
+	
+	public String updateLC(){
+		int verif = lcService.updateLC(lCommande, id_prod);
 		
 		if(verif != 0){
 			List<LigneCommande> liste = lcService.getLigneCommande();
@@ -72,16 +87,10 @@ public class LigneCommandeManagedBean implements Serializable {
 			
 			return "panier";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur au cours de l'ajout"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur au cours de la modification du panier"));
 			return "ajoutPanierTemp";
 		}
 		
-		
-	}
-	
-	
-	public String supprimerLC(){
-		return null;
 		
 	}
 	
@@ -93,18 +102,9 @@ public class LigneCommandeManagedBean implements Serializable {
 		
 		int verif = 0;
 		//int verif = lcService.modifierLC(lCommande, id_prod);
-		
-		if(verif != 0){
-			List<LigneCommande> liste = lcService.getLigneCommande();
-			System.out.println(liste);
-			this.maSession.setAttribute("panier", liste);
-			
-			return "panier";
-		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur au cours de l'ajout"));
-			return "ajoutPanierTemp";
-		}
-		
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Iciiiii à Naganoooooo"));
+
+		return null;		
 	}
 	
 	

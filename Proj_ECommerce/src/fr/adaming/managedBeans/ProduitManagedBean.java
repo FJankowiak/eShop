@@ -56,7 +56,8 @@ public class ProduitManagedBean implements Serializable {
 		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		List<Produit> listeprod=produitService.getlisteProduit();
 		System.out.println(listeprod);
-		maSession.setAttribute("produitsListe", listeprod);
+//		maSession.setAttribute("produitsListe", listeprod);
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("produitsListe", listeprod);
 	}
 
 	// GETTERS ET SETTERS

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
+import fr.adaming.model.LigneCommande;
 import fr.adaming.service.IClientService;
 import fr.adaming.service.ICommandeService;
 
@@ -72,9 +73,9 @@ public class ClientManagedBean implements Serializable{
 			
 			
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("clientCommande", clAjout);
-			this.commande = new Commande();
-			commande.setClient(clAjout);
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("commande", commande);
+			List<LigneCommande> liste = (List<LigneCommande>) maSession.getAttribute("panier");
+			System.out.println(liste);
+			this.commande = commandeService.finaliserCommande(liste, clAjout);
 			
 			return "commandeValidee";
 		} else {

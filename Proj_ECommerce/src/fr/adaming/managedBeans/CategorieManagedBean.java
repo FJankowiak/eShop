@@ -48,6 +48,11 @@ public class CategorieManagedBean implements Serializable {
 		// RECUPERER LA SESSION
 
 		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		List<Categorie> listecat= categorieService.getlisteCategorie();
+		System.out.println(listecat);
+//		maSession.setAttribute("categorieListe", listecat);
+
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("categorieListe", listecat);
 
 	}
 
