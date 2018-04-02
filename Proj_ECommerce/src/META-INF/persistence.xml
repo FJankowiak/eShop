@@ -10,6 +10,7 @@
 		<class>fr.adaming.model.Client</class>
 		<class>fr.adaming.model.Commande</class>
 		<class>fr.adaming.model.Produit</class>
+		<class>fr.adaming.model.LigneCommande</class>
 		<class>fr.adaming.model.Categorie</class>
 
 		<!-- Les props de hibernate -->
