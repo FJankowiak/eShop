@@ -1,6 +1,7 @@
 package fr.adaming.model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -166,16 +167,16 @@ public class Produit implements Serializable {
 	public void setCat(Categorie cat) {
 		this.cat = cat;
 	}
-	
 
-	
-	
-	//TOSTRING
 	@Override
 	public String toString() {
 		return "Produit [id=" + id + ", designation=" + designation + ", description=" + description + ", prix=" + prix
-				+ ", quantite=" + quantite + ", selectionne=" + selectionne + ", photo=" + photo + "]";
+				+ ", quantite=" + quantite + ", selectionne=" + selectionne + ", photo=" + Arrays.toString(photo)
+				+ ", image=" + image + ", cat=" + cat + "]";
 	}
+	
+
+	
 
 
 

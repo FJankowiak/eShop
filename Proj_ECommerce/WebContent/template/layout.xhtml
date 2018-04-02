@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<h:head>
+	<title>Ma facelet layout</title>
+</h:head>
+
+<h:body>
+
+	<!-- inclure mon header et ajouter du style -->
+	<div style="height: 120px; background-color: transparent;">
+		<!-- Definir l'endroit où mon header doit etre inclus -->
+		<ui:insert name="header">
+			<!-- inclure concretement mon header -->
+			<ui:include src="/template/header.xhtml"></ui:include>
+
+		</ui:insert>
+
+	</div>
+
+	<!-- inclure mon corps et ajouter du style -->
+	<div style="height: 800px; background-color: transparent;">
+		<!-- Definir l'endroit où mon corps doit etre inclus -->
+		<ui:insert name="corps">
+			<!-- inclure concretement mon header -->
+			<ui:include src="/template/corps.xhtml"></ui:include>
+
+		</ui:insert>
+
+	</div>
+
+</h:body>
+
+</html>

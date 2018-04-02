@@ -1,12 +1,17 @@
 package fr.adaming.managedBeans;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import fr.adaming.model.Categorie;
+import fr.adaming.model.Client;
 import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ILigneCommandeService;
@@ -17,12 +22,15 @@ public class LigneCommandeManagedBean implements Serializable {
 	ILigneCommandeService lcService;
 	@EJB
 	IProduitService prodService;
+	@ManagedProperty(value="#{produit}")
+	private ProduitManagedBean produit;
+	
 	
 	//Attributs
 	private LigneCommande lCommande;
-	private Produit produit;
+//	private Produit produit;
 	HttpSession maSession;
-	private int id_prod;
+	private Long id_prod;
 	
 	public LigneCommandeManagedBean() {
 		this.lCommande = new LigneCommande();
@@ -31,12 +39,6 @@ public class LigneCommandeManagedBean implements Serializable {
 	// POUR QUE CETTE METHODE S'EXECUTE APRES L'INSTANCIATION DU MB
 	
 	// Getters et setters
-	@PostConstruct
-	public void init() {
-		// RECUPERER LA SESSION 
-		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-	}
-
 	public LigneCommande getlCommande() {
 		return lCommande;
 	}
@@ -45,48 +47,65 @@ public class LigneCommandeManagedBean implements Serializable {
 		this.lCommande = lCommande;
 	}
 
-	public Produit getProduit() {
+	public ProduitManagedBean getProduit() {
 		return produit;
 	}
 
-	public void setProduit(Produit produit) {
+	public void setProduit(ProduitManagedBean produit) {
 		this.produit = produit;
 	}
 	
-	public int getId_prod() {
+	public Long getId_prod() {
 		return id_prod;
 	}
 
-	public void setId_prod(int id_prod) {
+	public void setId_prod(Long id_prod) {
 		this.id_prod = id_prod;
 	}
 
 	// Méthodes
-	public String ajouterLC(){
-		int verif = lcService.ajouterLC(lCommande, id_prod);
+	@PostConstruct
+	public void init() {
+		// RECUPERER LA SESSION
+		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		List<LigneCommande> lcListe = lcService.getLigneCommande();
+		maSession.setAttribute("totalCommande", lcService.getTotal());
+		System.out.println(lcListe);
+//		maSession.setAttribute("panier", lcListe);
+
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("panier", lcListe);
+
+	}
+	
+
+	
+	public String updateLC(){
+		int verif = lcService.updateLC(lCommande, id_prod);
 		
 		if(verif != 0){
-			// TODO Ramener à la page de selection des produits quel que soit le cas
+			List<LigneCommande> liste = lcService.getLigneCommande();
+			this.maSession.setAttribute("panier", liste);
 			
-			
-			return "Panier";
+			return "panier";
 		} else {
-			return "ajoutPanierTemp";
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur au cours de la modification du panier"));
+			return "modifPanier";
 		}
 		
 		
 	}
 	
 	
-	public String supprimerLC(){
-		return null;
-		
-	}
-	
-	
 	public String modifierLC(){
-		return null;
+		System.out.println("Modifier : le produit est là ?");
+		System.out.println(this.produit);
 		
+		
+		int verif = 0;
+		//int verif = lcService.modifierLC(lCommande, id_prod);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Iciiiii à Naganoooooo"));
+
+		return null;		
 	}
 	
 	

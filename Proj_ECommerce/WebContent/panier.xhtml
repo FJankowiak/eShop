@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Panier</title>
+	<h:outputStylesheet library="css" name="monStyle.css" />
+</h:head>
+
+<h:body>
+	<p:graphicImage library="image" name="logo.jpg" styleClass="logo" />
+
+	<h1 style="color: coral; text-align: center">Mon panier</h1>
+
+	<h:form>
+	<p:graphicImage library="image" name="shopping-basket.png" />
+		<p:dataTable var="pa" value="#{sessionScope.panier}">
+
+			<p:column headerText="ID Produit">
+				<h:outputText value="#{pa.getProduit().getId()}" />
+			</p:column>
+
+			<p:column headerText="Quantité">
+				<h:outputText value="#{pa.quantite}" />
+			</p:column>
+
+			<p:column headerText="Prix">
+				<h:outputText value="#{pa.prix}" />
+			</p:column>
+
+			<p:column headerText="Operations">
+				<h:commandLink value="Modifier" action="#" update="@all">
+					<f:setPropertyActionListener value="#{lc.id}" target="#" />
+					<f:setPropertyActionListener value="#{lc.quantite}" target="#" />
+				</h:commandLink> | 
+						<h:commandLink value="Supprimer" action="#{lcMB.supprimerLC}"
+					update="@all">
+					<f:setPropertyActionListener value="#{lcMB.id}"
+						target="#{lcMB.produit.id_p}" />
+				</h:commandLink>
+
+			</p:column>
+
+		</p:dataTable>
+
+	</h:form>
+
+	<h:link value="Finaliser la commande" outcome="ajoutClient.xhtml" />
+
+	<p:dock position="bottom">
+		<p:menuitem value="Accueil" icon="resources/image/house1.png" url="accueil.xhtml" />
+
+	</p:dock>
+
+
+
+
+
+
+</h:body>
+
+</html>

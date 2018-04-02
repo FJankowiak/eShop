@@ -7,28 +7,56 @@
 
 <h:head>
 	<title>Tableau de bord administrateurs</title>
-
+<h:outputStylesheet library="css" name="monStyle.css"/>
 </h:head>
 
 <h:body>
+	<p:graphicImage library="image" name="logo.jpg" styleClass="logo"/>
 
-	<!-- inclure mon template avec des modifs -->
-	<!-- 	<ui:composition template="/template/layoutAdmin.xhtml"> -->
-	<!-- Modifier la partie corps -->
-	<!-- 		<ui:define name="corps"> -->
+
+	
 
 	<h:form>
-		<p:breadCrumb>
-			<p:menuitem value="Tableau Administrateur" url="listesAdmin.xhtml" />
-			<p:menuitem value="Ajouter produit" url="ajoutProd.xhtml" />
-			<p:menuitem value="Ajouter Categorie" url="ajoutCat.xhtml" />
-			<p:menuitem value="Modifier Produit" url="modifierProd.xhtml" />
-			<p:menuitem value="Modifier categorie" url="modifierCat.xhtml" />
-			<p:menuitem value="supprimer categorie" url="suppCat.xhtml" />
-			<p:menuitem value="supprimer prod" url="suppProd.xhtml" />
+		<p:cache region="testcache" key="toolbar">
+		
+			<p:toolbar>
+			
+				<p:toolbarGroup align="left">
+					<p:menuButton type="button" value="Tableau Admin"> 
+					<p:menuitem value="Administrateur" url="listesAdmin.xhtml"/>
+					</p:menuButton>
+					
+						<p:separator/>
+						
+					<p:menuButton type="button" value="Produit">
+					<p:menuitem value="Ajouter produit" url="ajoutProd.xhtml"/>
+					<p:menuitem value="Modifier Produit" url="modifierProd.xhtml"/>
+					<p:menuitem value="supprimer prod" url="suppProd.xhtml"/>
+					</p:menuButton>
+					
+					<p:separator/>
+					
+					<p:menuButton type="button" value="Categorie">
+					<p:menuitem value="Ajouter Categorie" url="ajoutCat.xhtml"/>
+					<p:menuitem value="Modifier categorie" url="modifierCat.xhtml"/>
+					<p:menuitem value="supprimer categorie" url="suppCat.xhtml"/>
+					</p:menuButton>
 
-		</p:breadCrumb>
+					<p:separator/>
+
+					
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:commandButton type="button" value="Quit" icon="ui-icon-close" action="#{aMB.seDeconnecter}"/>
+				</p:toolbarGroup>
+				
+			</p:toolbar>
+			
+		</p:cache>
+		
 	</h:form>
+
 
 	<h:form>
 		<h1>Liste des produits</h1>
@@ -70,6 +98,10 @@
 	<h:form>
 		<h1>Liste des categories</h1>
 		<p:dataTable var="ct" value="#{sessionScope.categorieListe}">
+
+			<p:column headerText="Id">
+				<h:outputText value="#{ct.id}" />
+			</p:column>
 			<p:column headerText="Nom">
 				<h:outputText value="#{ct.nomCategorie}" />
 			</p:column>
@@ -86,9 +118,10 @@
 	</h:form>
 
 
+<p:dock position="bottom">
+		<p:menuitem value="Accueil" icon="resources/image/house1.png" url="accueil.xhtml" />
 
-	<!-- 		</ui:define> -->
-	<!-- 	</ui:composition> -->
+	</p:dock>
 
 
 </h:body>

@@ -38,7 +38,7 @@ public class CategorieManagedBean implements Serializable {
 	private Produit produit;
 	private Admin admin;
 	HttpSession maSession;
-
+	List<Categorie> listeCat;
 
 	private UploadedFile uf;
 
@@ -46,7 +46,7 @@ public class CategorieManagedBean implements Serializable {
 
 	public CategorieManagedBean() {
 		this.categorie = new Categorie();
-		this.uf=new UploadedFileWrapper();
+		this.uf = new UploadedFileWrapper();
 	}
 
 	@PostConstruct
@@ -55,6 +55,8 @@ public class CategorieManagedBean implements Serializable {
 		// RECUPERER LA SESSION
 
 		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		
+	
 
 	}
 
@@ -62,6 +64,14 @@ public class CategorieManagedBean implements Serializable {
 
 	public Categorie getCategorie() {
 		return categorie;
+	}
+
+	public List<Categorie> getListeCat() {
+		return listeCat;
+	}
+
+	public void setListeCat(List<Categorie> listeCat) {
+		this.listeCat = listeCat;
 	}
 
 	public void setCategorie(Categorie categorie) {
@@ -83,7 +93,7 @@ public class CategorieManagedBean implements Serializable {
 	public void setAdmin(Admin admin) {
 		this.admin = admin;
 	}
-	
+
 	public UploadedFile getUf() {
 		return uf;
 	}
@@ -95,19 +105,19 @@ public class CategorieManagedBean implements Serializable {
 	// METHODES
 
 	public String ajouterCat() {
-		
-			
 
-		Categorie catOut = categorieService.addCategorie(categorie);
+		
 		this.categorie.setPhoto(this.uf.getContents());
+		Categorie catOut = categorieService.addCategorie(categorie);
 
 		if (catOut.getId() != 0) {
 
 			// RECUP LA LISTE
 
-			List<Categorie> listeCat = categorieService.getlisteCategorie();
+			List<Categorie> liste = categorieService.getlisteCategorie();
+			
+			this.listeCat=liste;
 
-			maSession.setAttribute("categorieListe", listeCat);
 
 			return "listesAdmin";
 
@@ -118,9 +128,6 @@ public class CategorieManagedBean implements Serializable {
 			return "ajoutCat";
 		}
 	}
-	
-	
-	
 
 	public String modifierCat() {
 		int verif = categorieService.updateCategorie(categorie);
@@ -158,9 +165,5 @@ public class CategorieManagedBean implements Serializable {
 
 		}
 	}
-	
-	
-	
-	
-	
+
 }
