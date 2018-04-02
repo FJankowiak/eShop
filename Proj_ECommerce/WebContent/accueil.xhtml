@@ -12,44 +12,77 @@
 
 <h:body>
 
-<!-- inclure mon template avec des modifs -->
-<ui:composition template = "/template/layout.xhtml">
-<!-- Modifier la partie corps -->
-	<ui:define name="corps">
-	
+	<!-- inclure mon template avec des modifs -->
+	<ui:composition template="/template/layout.xhtml">
+		<!-- Modifier la partie corps -->
+		<ui:define name="corps">
+
 	<h1 style="color: red; text-align: center">Liste des catégories</h1>
 	<h:form>
 
-		<p:dataTable var="pr" value="#{sessionScope.produitsListe}">
+
+
+
+
+		<p:dataTable var="ct" value="#{sessionScope.categorieListe}">
 			<p:column headerText="ID">
-				<h:outputText value="#{pr.id}" />
+				<h:outputText value="#{ct.categorie.id}" />
 			</p:column>
 
-			<p:column headerText="Designation">
-				<h:outputText value="#{pr.designation}" />
+			<p:column headerText="Nom">
+				<h:outputText value="#{ct.categorie.nomCategorie}" />
 			</p:column>
 
-			<p:column headerText="Prix">
-				<h:outputText value="#{pr.prix}" />
+			<p:column headerText="Description">
+				<h:outputText value="{ct.categorie.description}" />
 			</p:column>
 
-			<p:column headerText="Quantité">
-				<h:outputText value="#{pr.quantite}" />
+			<p:column headerText="Photo">
+				<p:graphicImage value="#{ct.categorie.image}"/>
 			</p:column>
 
-			<p:column headerText="Selectionné">
-				<h:outputText value="#{pr.selectionne}" />
-			</p:column>
+			
 
 		</p:dataTable>
 
 	</h:form>
-
 	
+	
+	<h1>
+		
+		Espace administrateur
+	</h1>
 
 
-	</ui:define>
-</ui:composition>
+	<h:form>
+		<h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();"
+			title="login">
+			<p:graphicImage library="image" name="lock.png" styleClass="login" />
+		</h:outputLink>
+
+
+
+		<p:dialog header="Connexion" widgetVar="dlg">
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputLabel value="Mail:" />
+				<p:inputText value="#{aMB.admin.mail}" label="mail" />
+
+				<h:outputLabel value="MDP:" />
+				<p:password value="#{aMB.admin.mdp}" label="MDP" />
+
+				<f:facet name="footer">
+					<p:commandButton value="seConnecter" action="#{aMB.seConnecter}" />
+				</f:facet>
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
+
+
+
+
+
+		</ui:define>
+	</ui:composition>
 
 </h:body>
 
