@@ -19,4 +19,8 @@ public interface ILigneCommandeDao {
 	
 	public LigneCommande isExist(LigneCommande lc);
 	
+	public double getTotal();
+	
+	public void viderLC();
+	
 }

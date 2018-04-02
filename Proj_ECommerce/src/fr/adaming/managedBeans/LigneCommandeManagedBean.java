@@ -69,6 +69,7 @@ public class LigneCommandeManagedBean implements Serializable {
 		// RECUPERER LA SESSION
 		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		List<LigneCommande> lcListe = lcService.getLigneCommande();
+		maSession.setAttribute("totalCommande", lcService.getTotal());
 		System.out.println(lcListe);
 //		maSession.setAttribute("panier", lcListe);
 
@@ -88,7 +89,7 @@ public class LigneCommandeManagedBean implements Serializable {
 			return "panier";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur au cours de la modification du panier"));
-			return "ajoutPanierTemp";
+			return "modifPanier";
 		}
 		
 		

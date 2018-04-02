@@ -18,5 +18,8 @@ public interface ILigneCommandeService {
 	
 	public int updateLC(LigneCommande lcommande, Long id_prod);
 	
+	public double getTotal();
+	
+	public void viderLC();
 
 }

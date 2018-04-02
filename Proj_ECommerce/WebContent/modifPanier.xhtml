@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Page de test d'ajout au panier</title>
+</h:head>
+
+<h:body>
+
+
+	<!-- inclure mon template avec des modifs -->
+	<ui:composition template="/template/layout.xhtml">
+		<!-- Modifier la partie corps -->
+		<ui:define name="corps">
+		
+		<h1 style = "color: red; text-align: center">Modifier le panier</h1>
+
+			<h:messages style="color : red" />
+			
+			<h:form>
+				<h:panelGrid columns="2">
+			 Id : <h:inputText value="#{lcMB.id_prod}" />
+			 Quantité : <h:inputText value="#{lcMB.lCommande.quantite}" />
+ 			 
+			
+			<h:commandButton value="Modifier le panier" action="#{lcMB.updateLC}" />
+				</h:panelGrid>
+
+			</h:form>
+
+
+		</ui:define>
+	</ui:composition>
+
+
+
+</h:body>
+
+</html>

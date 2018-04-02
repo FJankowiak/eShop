@@ -1,5 +1,6 @@
 package fr.adaming.dao;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -16,8 +17,12 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 	@PersistenceContext(name = "PU")
 	private EntityManager em;
 
+	DecimalFormat df = new DecimalFormat("#.##");
+
 	@Override
 	public int ajouterLC(LigneCommande lc) {
+		lc.setPrix(Double.valueOf(df.format(lc.getPrix())));
+
 		em.persist(lc);
 
 		if (lc.getId_ligne() != 0) {
@@ -47,9 +52,10 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 	public int modifierLC(LigneCommande lc) {
 		Long id_prod = lc.getProduit().getId();
 		int qt = lc.getQuantite();
+		double prix = Double.valueOf(df.format(lc.getPrix()));
 
 		// Requete JPQL
-		String req1 = "UPDATE LigneCommande lc SET lc.quantite=:pQuantite WHERE lc.produit.id=:pId";
+		String req1 = "UPDATE LigneCommande lc SET lc.quantite=:pQuantite, lc.prix=:pPrix WHERE lc.produit.id=:pId";
 
 		// CREER UN OBJET QUERY POUR ENVOYER LA REQUETE JQL
 		Query query1 = em.createQuery(req1);
@@ -59,6 +65,7 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 		// Passage des parametres
 		query1.setParameter("pQuantite", qt);
 		query1.setParameter("pId", id_prod);
+		query1.setParameter("pPrix", prix);
 
 		System.out.println();
 
@@ -85,7 +92,7 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 	public LigneCommande isExist(LigneCommande lc) {
 		// JPQL parce qu'on est dans JPA (persistence) - AS n'est pas
 		// obligatoire
-		int id_pr = (int) (long) lc.getProduit().getId();
+		Long id_pr = lc.getProduit().getId();
 
 		System.out.println(id_pr);
 
@@ -98,6 +105,7 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 		System.out.println(lc);
 		// Passage des params
 		query.setParameter("pId", id_pr);
+		System.out.println("Pas ici");
 
 		try {
 			LigneCommande lcOut = (LigneCommande) query.getSingleResult();
@@ -107,6 +115,26 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 			System.out.println(e);
 			return null;
 		}
+	}
+
+	@Override
+	public double getTotal() {
+		String req = "SELECT SUM(prix) FROM lignes_commande";
+
+		Query query = em.createQuery(req);
+		double somme = (double) query.getSingleResult();
+
+		somme = Double.valueOf(df.format(somme));
+
+		return somme;
+	}
+
+	@Override
+	public void viderLC() {
+		Query query = em.createQuery("DELETE FROM LigneCommande");
+
+		query.executeUpdate();
+
 	}
 
 }
