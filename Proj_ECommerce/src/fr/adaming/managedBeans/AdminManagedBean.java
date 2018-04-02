@@ -78,6 +78,8 @@ public class AdminManagedBean implements Serializable {
 
 			this.listeProduits = produitService.getlisteProduit();
 			this.listeCategorie = categorieService.getlisteCategorie();
+			
+			System.out.println(listeProduits);
 
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("produitListe", listeProduits);
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("categorieListe",
@@ -89,6 +91,7 @@ public class AdminManagedBean implements Serializable {
 			return "listesAdmin";
 
 		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Authentification impossible"));
 
 			return "accueil";
 		}

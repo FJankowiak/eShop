@@ -1,0 +1,34 @@
+<!DOCTYPE html >
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<head>
+<title>Login</title>
+</head>
+
+
+<h:body>
+
+	<h:form>
+		<p:breadCrumb>
+			<p:menuitem value="Tableau Administrateur" url="listesAdmin.xhtml" />
+			<p:menuitem value="Ajouter produit" url="ajoutProd.xhtml" />
+			<p:menuitem value="Ajouter Categorie" url="ajoutCat.xhtml" />
+			<p:menuitem value="Modifier Produit" url="modifierProd.xhtml" />
+			<p:menuitem value="Modifier categorie" url="modifierCat.xhtml" />
+			<p:menuitem value="Supprimer categorie" url="suppCat.xhtml" />
+			<p:menuitem value="Supprimer produit" url="suppProd.xhtml" />
+
+		</p:breadCrumb>
+	</h:form>
+	
+	<h:form>
+		<h:commandButton value="Se déconnecter" action="#{aMB.seDeconnecter}" />
+	</h:form>
+
+
+</h:body>
+</html>

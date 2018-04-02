@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -21,8 +22,8 @@ public class ClientManagedBean implements Serializable{
 	// Transformation de l'association UML en java
 	@EJB
 	IClientService clientService;
-//	@EJB
-//	ICommandeService commandeService;
+	@EJB
+	ICommandeService commandeService;
 	
 	
 	// Attributs
@@ -68,10 +69,17 @@ public class ClientManagedBean implements Serializable{
 		Client clAjout = clientService.addClient(this.client);
 		
 		if(clAjout.getIdClient() != 0){
+			
+			
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("clientCommande", clAjout);
-
+			this.commande = new Commande();
+			commande.setClient(clAjout);
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("commande", commande);
+			
 			return "commandeValidee";
 		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Impossible d'ajouter le client"));
+
 			return "clientCreation";
 		}
 	}

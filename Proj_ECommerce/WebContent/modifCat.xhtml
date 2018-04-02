@@ -13,16 +13,12 @@
 
 
 <h:body>
-	<p:breadCrumb>
-		<p:menuitem value="Tableau Administrateur" url="listeAdmin.xhtml"/>
-		<p:menuitem value="Ajouter produit" url="ajoutProd.xhtml"/>
-		<p:menuitem value="Ajouter Categorie" url="ajoutCat.xhtml"/>
-		<p:menuitem value="Modifier Produit" url="modifierProd.xhtml"/>
-		<p:menuitem value="Modifier Produit" url="modifierCat.xhtml"/>
 
-	</p:breadCrumb>
-
-
+<!-- inclure mon template avec des modifs -->
+<ui:composition template = "/template/layoutAdmin.xhtml">
+<!-- Modifier la partie corps -->
+	<ui:define name="corps">
+	
 	<h:form>
 
 
@@ -61,6 +57,11 @@
 
 		</h:panelGrid>
 	</h:form>                          
+	
+	
+
+	</ui:define>
+</ui:composition>
 
 </h:body>
 </html>

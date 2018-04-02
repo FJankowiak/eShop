@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -27,6 +28,7 @@ public class ProduitManagedBean implements Serializable {
 
 	@EJB
 	IProduitService produitService;
+//	@ManagedProperty(value = "")
 
 	// DECLARATION DES ATTRIBUTS DU ENVOYER A LA PAGE
 
@@ -34,6 +36,7 @@ public class ProduitManagedBean implements Serializable {
 	private Admin admin;
 	private Categorie cat;
 	HttpSession maSession;
+	private Long id_p;
 
 	// CONSTRUCTEUR VIDE
 	public ProduitManagedBean() {
@@ -51,7 +54,9 @@ public class ProduitManagedBean implements Serializable {
 		// RECUPERER LA SESSION
 
 		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-
+		List<Produit> listeprod=produitService.getlisteProduit();
+		System.out.println(listeprod);
+		maSession.setAttribute("produitsListe", listeprod);
 	}
 
 	// GETTERS ET SETTERS
@@ -78,6 +83,14 @@ public class ProduitManagedBean implements Serializable {
 	public void setCat(Categorie cat) {
 		this.cat = cat;
 	}
+	
+	public Long getId_p() {
+		return id_p;
+	}
+	
+	public void setId_p(Long id_p) {
+		this.id_p = id_p;
+	}
 
 	// METHODES
 
@@ -94,6 +107,7 @@ public class ProduitManagedBean implements Serializable {
 			// RECUPERER LA NOUVELLE LISTE DE PRODUIT
 
 			List<Produit> listeprod = produitService.getlisteProduit();
+			System.out.println(listeprod);
 
 			// METTRE A JOUR LA LISTE
 
@@ -117,7 +131,7 @@ public class ProduitManagedBean implements Serializable {
 			
 			List<Produit> listeprod=produitService.getlisteProduit();
 			
-			maSession.setAttribute("produitListe",listeprod);
+			maSession.setAttribute("produitsListe",listeprod);
 			
 			return "listeAdmin";
 		}else{
@@ -137,7 +151,7 @@ public class ProduitManagedBean implements Serializable {
 			
 			List<Produit> listeprod=produitService.getlisteProduit();
 			
-			maSession.setAttribute("produitListe",listeprod);
+			maSession.setAttribute("produitsListe",listeprod);
 			
 			return "listeAdmin";
 		}else{
@@ -147,4 +161,10 @@ public class ProduitManagedBean implements Serializable {
 			
 		}
 	}
+	
+//	public Produit produitPanier(){
+//		this.produit = produitService.rechercherProduit(id_p);
+//		
+////		LigneCommandeManagedBean.
+//	}
 }

@@ -18,4 +18,6 @@ public interface ILigneCommandeDao {
 	public List<LigneCommande> getLigneCommande();
 	
 	public LigneCommande isExist(LigneCommande lc);
+	
+	public int panierUpdate();
 }

@@ -45,17 +45,27 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 
 	@Override
 	public int modifierLC(LigneCommande lc) {
+		Long id_prod = lc.getProduit().getId();
+		int qt = lc.getQuantite();
+		
 		//Requete JPQL
-		String req1="UPDATE LigneCommande lc SET lc.quantite=:pQuantite";
+		String req1="UPDATE LigneCommande lc SET lc.quantite=:pQuantite WHERE id_p=:pId";
 		
 		//CREER UN OBJET QUERY POUR ENVOYER LA REQUETE JQL
 		Query query1=em.createQuery(req1);
 		
+		System.out.println("id " + id_prod + "quantité " + qt);
+		
 		//Passage des parametres
-		query1.setParameter("pQuantite",lc.getQuantite());
+		query1.setParameter("pQuantite", qt);
+		query1.setParameter("pId",id_prod);
+		
+		System.out.println();
 		
 		//Envoyer la requete et récupérer le résultat
-		return query1.executeUpdate();
+		int verif = query1.executeUpdate();
+		
+		return verif;
 	}
 
 	@Override
@@ -74,16 +84,37 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 	@Override
 	public LigneCommande isExist(LigneCommande lc) {
 		// JPQL parce qu'on est dans JPA (persistence) - AS n'est pas obligatoire
-		String req = "SELECT lc from LigneCommande lc WHERE lc.getProduit.getId=:pId";
+		int id_pr = (int) (long) lc.getProduit().getId();
+		
+		System.out.println(id_pr);
+		
+		String req = "SELECT lc from LigneCommande lc WHERE p_id=:pId";
+		System.out.println(req);
 		
 		// Créer un objet de type query pour envoyer la requête jpql
 		Query query = em.createQuery(req);
 		
+		System.out.println(lc);
 		// Passage des params
-		query.setParameter("pId", lc.getProduit().getId());
+		query.setParameter("pId", id_pr);
 		
-		// Récupérer l'agent 
-		return (LigneCommande) query.getSingleResult();
+		try {
+			LigneCommande lcOut = (LigneCommande) query.getSingleResult();
+			
+			return lcOut;
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
+		
+		
+		
+	}
+
+	@Override
+	public int panierUpdate() {
+		
+		return 0;
 	}
 
 }

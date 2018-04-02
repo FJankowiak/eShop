@@ -6,6 +6,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
 import fr.adaming.dao.ILigneCommandeDao;
+import fr.adaming.dao.IProduitDao;
 import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Produit;
 
@@ -15,28 +16,31 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService{
 	@EJB
 	private ILigneCommandeDao ligneCommandeDao;
 	@EJB
-	private IProduitService prodService;
+	private IProduitDao prodService;
 
 
 	@Override
-	public int ajouterLC(LigneCommande lc, int id_prod) {
-
+	public int ajouterLC(LigneCommande lc, Long id_prod) {
 		Produit produit = prodService.rechercherProduit(id_prod);
 		
 		if(produit != null){
 			lc.setProduit(produit);
-			lc.setPrix(produit.getPrix());
+			System.out.println("Je suis dans lignecommandeService");
+			System.out.println(produit);
+			
+			lc.setPrix(produit.getPrix() * lc.getQuantite());
+			
+			System.out.println(lc);
 			
 			LigneCommande lc2 = ligneCommandeDao.isExist(lc);
 			
 			if(lc2 == null){
 				return ligneCommandeDao.ajouterLC(lc);
 			} else {
-				// mettre à jou plutôt que d'avoir un doublon
-				this.modifierLC(lc);
+				// mettre à joue plutôt que d'avoir un doublon
+				return this.modifierLC(lc);
 			}
 		}
-		
 		return 0;
 	}
 

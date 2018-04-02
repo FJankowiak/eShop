@@ -8,7 +8,7 @@ import fr.adaming.model.LigneCommande;
 
 @Local
 public interface ILigneCommandeService {
-	public int ajouterLC(LigneCommande lc, int id_prod);
+	public int ajouterLC(LigneCommande lc, Long id_prod);
 	
 	public int supprimerLC(LigneCommande lc);
 	
