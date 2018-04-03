@@ -38,7 +38,10 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService {
 				} else {
 					System.out.println("Mise à jour");
 					lc.setPrix(produit.getPrix() * lc.getQuantite());
+
+
 					System.out.println(lc.getPrix());
+
 					return ligneCommandeDao.modifierLC(lc);
 				}
 			} else if (lc.getQuantite() != 0){

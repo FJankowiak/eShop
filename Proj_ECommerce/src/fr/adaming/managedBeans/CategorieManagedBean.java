@@ -9,8 +9,11 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.management.ListenerNotFoundException;
+
 import javax.servlet.http.HttpSession;
+
+import org.primefaces.model.UploadedFile;
+import org.primefaces.model.UploadedFileWrapper;
 
 import fr.adaming.model.Admin;
 import fr.adaming.model.Categorie;
@@ -35,11 +38,15 @@ public class CategorieManagedBean implements Serializable {
 	private Produit produit;
 	private Admin admin;
 	HttpSession maSession;
+	List<Categorie> listeCat;
+
+	private UploadedFile uf;
 
 	// CONSTRUCTEUR VIDE
 
 	public CategorieManagedBean() {
 		this.categorie = new Categorie();
+		this.uf = new UploadedFileWrapper();
 	}
 
 	@PostConstruct
@@ -48,11 +55,8 @@ public class CategorieManagedBean implements Serializable {
 		// RECUPERER LA SESSION
 
 		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		List<Categorie> listecat= categorieService.getlisteCategorie();
-		System.out.println(listecat);
-//		maSession.setAttribute("categorieListe", listecat);
-
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("categorieListe", listecat);
+		
+	
 
 	}
 
@@ -60,6 +64,14 @@ public class CategorieManagedBean implements Serializable {
 
 	public Categorie getCategorie() {
 		return categorie;
+	}
+
+	public List<Categorie> getListeCat() {
+		return listeCat;
+	}
+
+	public void setListeCat(List<Categorie> listeCat) {
+		this.listeCat = listeCat;
 	}
 
 	public void setCategorie(Categorie categorie) {
@@ -82,19 +94,30 @@ public class CategorieManagedBean implements Serializable {
 		this.admin = admin;
 	}
 
+	public UploadedFile getUf() {
+		return uf;
+	}
+
+	public void setUf(UploadedFile uf) {
+		this.uf = uf;
+	}
+
 	// METHODES
 
 	public String ajouterCat() {
 
+		
+		this.categorie.setPhoto(this.uf.getContents());
 		Categorie catOut = categorieService.addCategorie(categorie);
 
 		if (catOut.getId() != 0) {
 
 			// RECUP LA LISTE
 
-			List<Categorie> listeCat = categorieService.getlisteCategorie();
+			List<Categorie> liste = categorieService.getlisteCategorie();
+			
+			this.listeCat=liste;
 
-			maSession.setAttribute("categorieListe", listeCat);
 
 			return "listesAdmin";
 
@@ -106,6 +129,8 @@ public class CategorieManagedBean implements Serializable {
 		}
 	}
 
+	// ssss
+	
 	public String modifierCat() {
 		int verif = categorieService.updateCategorie(categorie);
 
@@ -115,7 +140,7 @@ public class CategorieManagedBean implements Serializable {
 
 			maSession.setAttribute("categorieListe", listeCat);
 
-			return "listeAdmin";
+			return "listesAdmin";
 		} else {
 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec modification"));
@@ -134,7 +159,7 @@ public class CategorieManagedBean implements Serializable {
 
 			maSession.setAttribute("categorieListe", listecat);
 
-			return "listeAdmin";
+			return "listesAdmin";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec suppression"));
 
@@ -142,4 +167,5 @@ public class CategorieManagedBean implements Serializable {
 
 		}
 	}
+
 }

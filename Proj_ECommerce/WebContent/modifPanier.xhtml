@@ -7,17 +7,15 @@
 
 <h:head>
 	<title>Page de test d'ajout au panier</title>
+	<h:outputStylesheet library="css" name="monStyle.css"/>
 </h:head>
 
 <h:body>
 
-
-	<!-- inclure mon template avec des modifs -->
-	<ui:composition template="/template/layout.xhtml">
-		<!-- Modifier la partie corps -->
-		<ui:define name="corps">
+	<p:graphicImage library="image" name="logo.jpg" styleClass="logo"/>
+	
 		
-		<h1 style = "color: red; text-align: center">Modifier le panier</h1>
+		<h1 style = "color: coral; text-align: center">Modifier le panier</h1>
 
 			<h:messages style="color : red" />
 			
@@ -33,9 +31,10 @@
 			</h:form>
 
 
-		</ui:define>
-	</ui:composition>
+	<p:dock position="bottom">
+		<p:menuitem value="Accueil" icon="resources/image/house1.png" url="accueil.xhtml" />
 
+	</p:dock>
 
 
 </h:body>

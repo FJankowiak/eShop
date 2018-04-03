@@ -5,49 +5,96 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
+
 <h:head>
 	<meta charset="ISO-8859-1" />
 	<title>Ajouter une categorie</title>
+	<h:outputStylesheet library="css" name="monStyle.css"/>
 </h:head>
 
 
 <h:body>
-
-
-	<p:breadCrumb>
-		<p:menuitem value="Tableau Administrateur" url="listesAdmin.xhtml"/>
-		<p:menuitem value="Ajouter categorie" url="ajoutCat.xhtml"/>
-		<p:menuitem value="Modifier Produit" url="modifierProd.xhtml" />
-		<p:menuitem value="Modifier Produit" url="modifierCat.xhtml"/>
-
-	</p:breadCrumb>
-<h:form>
-	<h:panelGrid columns="2">
-		<div class="form-group">
-			Designation:
-			<h:inputText value="#{catMB.categorie.nomCategorie}"/>
-
-		</div>
-
-		<div class="form-group">
-			Description:
-			<h:inputText value="#{catMB.categorie.description}"/>
-		</div>
+	<p:graphicImage library="image" name="logo.jpg" styleClass="logo"/>
+	
+	<h:form>
+		<p:cache region="testcache" key="toolbar">
 		
-		<div>
+			<p:toolbar>
+			
+				<p:toolbarGroup align="left">
+					<p:menuButton type="button" value="Tableau Admin"> 
+					<p:menuitem value="Administrateur" url="listesAdmin.xhtml"/>
+					</p:menuButton>
+					
+						<p:separator/>
+						
+					<p:menuButton type="button" value="Produit">
+					<p:menuitem value="Ajouter produit" url="ajoutProd.xhtml"/>
+					<p:menuitem value="Modifier Produit" url="modifierProd.xhtml"/>
+					<p:menuitem value="supprimer prod" url="suppProd.xhtml"/>
+					</p:menuButton>
+					
+					<p:separator/>
+					
+					<p:menuButton type="button" value="Categorie">
+					<p:menuitem value="Ajouter Categorie" url="ajoutCat.xhtml"/>
+					<p:menuitem value="Modifier categorie" url="modifierCat.xhtml"/>
+					<p:menuitem value="supprimer categorie" url="suppCat.xhtml"/>
+					</p:menuButton>
+
+					<p:separator/>
+
+					
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:commandButton type="button" value="Quit" icon="ui-icon-close" action="#{aMB.seDeconnecter}"/>
+				</p:toolbarGroup>
+				
+			</p:toolbar>
+			
+		</p:cache>
+		
+	</h:form>
+
+	<h:form enctype="multipart/form-data">
+
+		<h1>Formulaire d'ajout</h1>
+		
+		<h:panelGrid columns="2">
+		
+			<div class="form-group">
+				Nom categorie:
+				<h:inputText value="#{catMB.categorie.nomCategorie}" />
+
+			</div>
+
+			<div class="form-group">
+				Description:
+				<h:inputText value="#{catMB.categorie.description}" />
+			</div>
+
+			<div>
 				Photo:
-				<p:graphicImage value="#{catMB.categorie.photo}"/>
+				<p:fileUpload value="#{catMB.uf}" mode="simple" />
+				<p:graphicImage value="#{catMB.categorie.image}" />
+
+
 
 			</div>
 
 
 
-			<p:commandButton value="Ajouter" actionListener="#{catMB.ajouterCat}"/>
-			
-			
+			<p:commandButton value="submit" ajax="false"
+				action="#{catMB.ajouterCat}" />
 
-	</h:panelGrid>
+
+
+		</h:panelGrid>
+
 	</h:form>
+
+	<h:messages style="color:red" />
 
 </h:body>
 </html>

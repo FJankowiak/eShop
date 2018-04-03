@@ -7,23 +7,57 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Ajouter un produit</title>
+	<h:outputStylesheet library="css" name="monStyle.css"/>
 
 
 </h:head>
 
 
 <h:body>
-	<p:breadCrumb>
-		<p:menuitem value="Tableau Administrateur" url="accueil.xhtml"/>
-		<p:menuitem value="Ajouter" url="ajoutProd.xhtml"/>
-		<p:menuitem value="Ajouter" url="ajoutProd.xhtml"/>
-		<p:menuitem value="Modifier Produit" url="modifierProd.xhtml"/>
-		<p:menuitem value="Modifier Produit" url="modifierCat.xhtml"/>
-
-	</p:breadCrumb>
-
+<p:graphicImage library="image" name="logo.jpg" styleClass="logo"/>
 
 	<h:form>
+		<p:cache region="testcache" key="toolbar">
+		
+			<p:toolbar>
+			
+				<p:toolbarGroup align="left">
+					<p:menuButton type="button" value="Tableau Admin"> 
+					<p:menuitem value="Administrateur" url="listesAdmin.xhtml"/>
+					</p:menuButton>
+					
+						<p:separator/>
+						
+					<p:menuButton type="button" value="Produit">
+					<p:menuitem value="Ajouter produit" url="ajoutProd.xhtml"/>
+					<p:menuitem value="Modifier Produit" url="modifierProd.xhtml"/>
+					<p:menuitem value="supprimer prod" url="suppProd.xhtml"/>
+					</p:menuButton>
+					
+					<p:separator/>
+					
+					<p:menuButton type="button" value="Categorie">
+					<p:menuitem value="Ajouter Categorie" url="ajoutCat.xhtml"/>
+					<p:menuitem value="Modifier categorie" url="modifierCat.xhtml"/>
+					<p:menuitem value="supprimer categorie" url="suppCat.xhtml"/>
+					</p:menuButton>
+
+					<p:separator/>
+
+					
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:commandButton type="button" value="Quit" icon="ui-icon-close" action="#{aMB.seDeconnecter}"/>
+				</p:toolbarGroup>
+				
+			</p:toolbar>
+			
+		</p:cache>
+		
+	</h:form>
+
+	<h:form enctype="multipart/form-data">
 
 
 		<h1>Ajouter un produit</h1>
@@ -52,18 +86,19 @@
 
 			<div>
 				Photo:
-				<p:graphicImage value="#{prMB.produit.photo}"/>
+				<p:fileUpload value="#{prMB.produit.uf}" mode="simple"/>
+				<p:graphicImage value="#{prMB.produit.image}"/>
 
 			</div>
 
 
 
-			<p:commandButton value="Ajouter" actionListener="#{prMB.ajouterProd}"/>
+			<p:commandButton value="submit" ajax="false" action="#{prMB.ajouterProd}"/>
 			
-			<h:message style="color:coral"/>
+			
 
 		</h:panelGrid>
 	</h:form>                          
-
+<h:message style="color:coral"/>
 </h:body>
 </html>

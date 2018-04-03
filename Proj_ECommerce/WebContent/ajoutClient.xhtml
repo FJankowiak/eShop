@@ -7,11 +7,14 @@
 
 <h:head>
 	<title>Page login</title>
+	<h:outputStylesheet library="css" name="monStyle.css" />
 </h:head>
 
 <h:body>
-
+	<p:graphicImage library="image" name="logo.jpg" styleClass="logo" />
 	<h:form>
+
+		<h:panelGrid columns="2">
 		Nom : <h:inputText value="#{clMB.client.nomClient}" />
 		Adresse : <h:inputText value="#{clMB.client.adresse}" />
 		E-mail : <h:inputText value="#{clMB.client.email}" />
@@ -19,10 +22,16 @@
 
 
 
-		<h:commandButton value="Finaliser la commande"
-			action="#{clMB.creerClient}" />
+			<h:commandButton value="Finaliser la commande"
+				action="#{clMB.creerClient}" />
+
+		</h:panelGrid>
 	</h:form>
 
+<p:dock position="bottom">
+		<p:menuitem value="Accueil" icon="resources/image/house1.png" url="accueil.xhtml" />
+
+	</p:dock>
 
 
 </h:body>

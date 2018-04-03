@@ -7,10 +7,13 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
+
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+
+import org.primefaces.model.UploadedFile;
+import org.primefaces.model.UploadedFileWrapper;
 
 import fr.adaming.model.Admin;
 import fr.adaming.model.Categorie;
@@ -28,7 +31,7 @@ public class ProduitManagedBean implements Serializable {
 
 	@EJB
 	IProduitService produitService;
-//	@ManagedProperty(value = "")
+
 
 	// DECLARATION DES ATTRIBUTS DU ENVOYER A LA PAGE
 
@@ -36,17 +39,23 @@ public class ProduitManagedBean implements Serializable {
 	private Admin admin;
 	private Categorie cat;
 	HttpSession maSession;
+	List<Produit> listeprod;
+
+	private UploadedFile uf;
+
 	private Long id_p;
+
 
 	// CONSTRUCTEUR VIDE
 	public ProduitManagedBean() {
 		this.produit = new Produit();
-		this.admin = new Admin();
-		this.cat = new Categorie();
+		this.uf=new UploadedFileWrapper();
 
 	}
 
 	// POUR QUE CETTE METHODE S'EXECUTE APRES L'INSTANCIATION DU MB
+
+
 
 	@PostConstruct
 	public void init() {
@@ -54,15 +63,22 @@ public class ProduitManagedBean implements Serializable {
 		// RECUPERER LA SESSION
 
 		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		List<Produit> listeprod=produitService.getlisteProduit();
-		System.out.println(listeprod);
-//		maSession.setAttribute("produitsListe", listeprod);
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("produitsListe", listeprod);
+	
+		
+		
 	}
 
 	// GETTERS ET SETTERS
 	public Produit getProduit() {
 		return produit;
+	}
+
+	public List<Produit> getListeprod() {
+		return listeprod;
+	}
+
+	public void setListeprod(List<Produit> listeprod) {
+		this.listeprod = listeprod;
 	}
 
 	public void setProduit(Produit produit) {
@@ -93,32 +109,42 @@ public class ProduitManagedBean implements Serializable {
 		this.id_p = id_p;
 	}
 
+	
+	public UploadedFile getUf() {
+		return uf;
+	}
+
+	public void setUf(UploadedFile uf) {
+		this.uf = uf;
+	}
 	// METHODES
 
 	// AJOUTER UN PRODUIT
 
 	public String ajouterProd() {
+		
+		
 
 		// APPEL DE LA METHODE AJOUTER
+		
+		produit.setPhoto(this.uf.getContents());
 
+		
 		Produit prodOut = produitService.addProduit(produit);
-
+	
 		if (prodOut.getId() != 0) {
 
 			// RECUPERER LA NOUVELLE LISTE DE PRODUIT
 
-			List<Produit> listeprod = produitService.getlisteProduit();
-			System.out.println(listeprod);
-
-			// METTRE A JOUR LA LISTE
-
-			maSession.setAttribute("produitsListe", listeprod);
-
+			List<Produit> listep = produitService.getlisteProduit();
+			
+			this.listeprod=listep;
+		
 			return "listesAdmin";
 
 		} else {
 
-			//FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec ajout"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec ajout"));
 
 			return "ajoutProd";
 		}
@@ -134,7 +160,7 @@ public class ProduitManagedBean implements Serializable {
 			
 			maSession.setAttribute("produitsListe",listeprod);
 			
-			return "listeAdmin";
+			return "listesAdmin";
 		}else{
 			
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec modification"));
@@ -154,7 +180,7 @@ public class ProduitManagedBean implements Serializable {
 			
 			maSession.setAttribute("produitsListe",listeprod);
 			
-			return "listeAdmin";
+			return "listesAdmin";
 		}else{
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec suppression"));
 			

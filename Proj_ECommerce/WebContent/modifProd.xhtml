@@ -7,18 +7,55 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Modifier un produit</title>
-
+<h:outputStylesheet library="css" name="monStyle.css"/>
 
 </h:head>
 
 
 <h:body>
+	<p:graphicImage library="image" name="logo.jpg" styleClass="logo"/>
+	<h:form>
+		<p:cache region="testcache" key="toolbar">
+		
+			<p:toolbar>
+			
+				<p:toolbarGroup align="left">
+					<p:menuButton type="button" value="Tableau Admin"> 
+					<p:menuitem value="Administrateur" url="listesAdmin.xhtml"/>
+					</p:menuButton>
+					
+						<p:separator/>
+						
+					<p:menuButton type="button" value="Produit">
+					<p:menuitem value="Ajouter produit" url="ajoutProd.xhtml"/>
+					<p:menuitem value="Modifier Produit" url="modifierProd.xhtml"/>
+					<p:menuitem value="supprimer prod" url="suppProd.xhtml"/>
+					</p:menuButton>
+					
+					<p:separator/>
+					
+					<p:menuButton type="button" value="Categorie">
+					<p:menuitem value="Ajouter Categorie" url="ajoutCat.xhtml"/>
+					<p:menuitem value="Modifier categorie" url="modifierCat.xhtml"/>
+					<p:menuitem value="supprimer categorie" url="suppCat.xhtml"/>
+					</p:menuButton>
+
+					<p:separator/>
+
+					
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:commandButton type="button" value="Quit" icon="ui-icon-close" action="#{aMB.seDeconnecter}"/>
+				</p:toolbarGroup>
+				
+			</p:toolbar>
+			
+		</p:cache>
+		
+	</h:form>
 
 
-<!-- inclure mon template avec des modifs -->
-<ui:composition template = "/template/layoutAdmin.xhtml">
-<!-- Modifier la partie corps -->
-	<ui:define name="corps">
 
 	<h:form>
 
@@ -71,8 +108,6 @@
 	
 	
 
-	</ui:define>
-</ui:composition>
 
 
 </h:body>

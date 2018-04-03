@@ -10,25 +10,19 @@
 </head>
 
 
-<h:body>
 
-	<h:form>
-		<p:breadCrumb>
-			<p:menuitem value="Tableau Administrateur" url="listesAdmin.xhtml" />
-			<p:menuitem value="Ajouter produit" url="ajoutProd.xhtml" />
-			<p:menuitem value="Ajouter Categorie" url="ajoutCat.xhtml" />
-			<p:menuitem value="Modifier Produit" url="modifProd.xhtml" />
-			<p:menuitem value="Modifier categorie" url="modifCat.xhtml" />
-			<p:menuitem value="Supprimer categorie" url="suppCat.xhtml" />
-			<p:menuitem value="Supprimer produit" url="suppProd.xhtml" />
 
-		</p:breadCrumb>
-	</h:form>
+
+    <h:body>
+	    <ui:composition>
+	    
+	<p:graphicImage id="log" library="image" name="logo.png" styleClass="login"/>
 	
-	<h:form>
-		<h:commandButton value="Se déconnecter" action="#{aMB.seDeconnecter}" />
-	</h:form>
-
-
-</h:body>
+		<h1>Jeu d'enfant</h1>
+				
+	    </ui:composition>
+    </h:body>
 </html>
+
+
+

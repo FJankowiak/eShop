@@ -7,13 +7,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.apache.commons.codec.binary.Base64;
+
 import fr.adaming.model.Admin;
 import fr.adaming.model.Categorie;
 
 @Stateless
 public class CategorieDaoImpl implements ICategorieDao {
 
-	@PersistenceContext(name = "PU")
+	@PersistenceContext(name ="PU")
 	private EntityManager em;
 
 	// RECUPERER LA LISTE DES CATEGORIE
@@ -23,20 +25,33 @@ public class CategorieDaoImpl implements ICategorieDao {
 
 		// REQUETE JPQL
 
-		String req = "SELECT cat FROM Categorie  AS cat";
+		String req = "SELECT cat FROM Categorie cat";
 
 		// CREER UN OBJET QUERY POUR ENVOYER LA REQUETE JPQL
 
 		Query query = em.createQuery(req);
+		
+		List<Categorie> listeOut= query.getResultList();
+		
+		for(Categorie cat : listeOut){
+			cat.setImage("data:image/png;base64" + Base64.encodeBase64String(cat.getPhoto()));
+		}
 
 		// ENVOYER LA REQUETE ET RECUPERER LE RESULTAT DE LA LISTE
-		return query.getResultList();
+		return listeOut;
 	}
 
 	// AJOUTER UNE CATEGORIE
+	
 	@Override
 	public Categorie addCategorie(Categorie cat) {
+
+		
+
 		em.persist(cat);
+		
+		
+		
 		return cat;
 	}
 
@@ -68,6 +83,18 @@ public class CategorieDaoImpl implements ICategorieDao {
 
 	@Override
 	public int deleteCategorie(Categorie cat) {
+
+		// creation de la requete :
+		String req3 = "DELETE FROM Categorie WHERE cat.id=:pIdCat";
+
+		// creation du query :
+		Query query3 = em.createQuery(req3);
+
+		// passage des parametres :
+		query3.setParameter("pIdCat", cat.getId());
+
+		// envoyer la requete et recuperer le resultat :
+
 		Categorie ctgOut = em.find(Categorie.class, cat.getId());
 
 		em.remove(ctgOut);
@@ -79,6 +106,7 @@ public class CategorieDaoImpl implements ICategorieDao {
 		} else {
 			return 0;
 		}
+
 	}
 
 }

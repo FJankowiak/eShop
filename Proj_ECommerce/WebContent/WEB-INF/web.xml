@@ -21,8 +21,14 @@
     <param-value>Development</param-value>
   </context-param>
   
-  
+  <!-- Charger le thème de Primefaces -->
+<context-param>
+<param-name>primefaces.THEME</param-name>
+<param-value>hot-sneaks</param-value>
+</context-param>
+
+
   <welcome-file-list>
-    <welcome-file>accueil.xhtml</welcome-file>
+    <welcome-file>/accueil.xhtml</welcome-file>
   </welcome-file-list>
 </web-app>
