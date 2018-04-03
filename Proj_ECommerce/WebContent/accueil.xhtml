@@ -26,19 +26,19 @@
 
 		<p:dataTable var="ct" value="#{sessionScope.categorieListe}">
 			<p:column headerText="ID">
-				<h:outputText value="#{ct.categorie.id}" />
+				<h:outputText value="#{ct.id}" />
 			</p:column>
 
 			<p:column headerText="Nom">
-				<h:outputText value="#{ct.categorie.nomCategorie}" />
+				<h:outputText value="#{ct.nomCategorie}" />
 			</p:column>
 
 			<p:column headerText="Description">
-				<h:outputText value="{ct.categorie.description}" />
+				<h:outputText value="#{ct.description}" />
 			</p:column>
 
 			<p:column headerText="Photo">
-				<p:graphicImage value="#{ct.categorie.image}"/>
+				<p:graphicImage value="#{ct.photo}"/>
 			</p:column>
 
 			

@@ -31,7 +31,7 @@
 					</p:column>
 
 					<p:column headerText="Prix">
-						<h:outputText value="#{pa.prix}" />
+						<h:outputText value="#{pa.prix}€" />
 					</p:column>
 
 					<p:column headerText="Operations">
@@ -48,8 +48,10 @@
 					</p:column>
 
 				</p:dataTable>
+				
 
 			</h:form>
+			<h:outputText value = "Total = #{sessionScope.tota}"></h:outputText>
 
 			<h:link value="Finaliser la commande" outcome="ajoutClient.xhtml" />
 

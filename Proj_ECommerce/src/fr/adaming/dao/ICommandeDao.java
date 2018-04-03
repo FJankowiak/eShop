@@ -11,5 +11,7 @@ import fr.adaming.model.LigneCommande;
 @Local
 public interface ICommandeDao {
 	public Commande finaliserCommande(List<LigneCommande> liste, Client cl);
+	
+	public void bilanPDF(Commande commande);
 
 }
