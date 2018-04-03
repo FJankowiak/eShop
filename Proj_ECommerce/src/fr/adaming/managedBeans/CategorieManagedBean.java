@@ -129,6 +129,8 @@ public class CategorieManagedBean implements Serializable {
 		}
 	}
 
+	
+	
 	public String modifierCat() {
 		int verif = categorieService.updateCategorie(categorie);
 

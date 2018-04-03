@@ -24,7 +24,7 @@
 		
 		
 	<p:dock position="bottom">
-		<p:menuitem value="Accueil" url="accueil.xhtml" />
+		<p:menuitem value="Accueil" url="accueil.xhtml"/>
 
 	</p:dock>
  <div class="ui-g-12 ui-md-4">
@@ -43,19 +43,19 @@
 
 		<p:dataTable var="ct" value="#{sessionScope.categorieListe}">
 			<p:column headerText="ID">
-				<h:outputText value="#{ct.catMB.id}" />
+				<h:outputText value="#{ct.id}"/>
 			</p:column>
 
 			<p:column headerText="Nom">
-				<h:outputText value="#{catMB.categorie.nomCategorie}" />
+				<h:outputText value="#{ct.nomCategorie}"/>
 			</p:column>
 
 			<p:column headerText="Description">
-				<h:outputText value="{catMB.description}" />
+				<h:outputText value="#{ct.description}"/>
 			</p:column>
 
 			<p:column headerText="Photo">
-				<p:graphicImage value="#{catMB.categorie.image}"/>
+				<h:graphicImage value="#{ct.image}"/>
 			</p:column>
 
 			
@@ -75,10 +75,10 @@
 		<p:dialog header="Connexion" widgetVar="dlg">
 			<h:panelGrid columns="2" cellpadding="5">
 				<h:outputLabel value="Mail:" />
-				<p:inputText value="#{aMB.admin.mail}" label="mail" />
+				<p:inputText value="#{aMB.admin.mail}" label="mail"/>
 
 				<h:outputLabel value="MDP:" />
-				<p:password value="#{aMB.admin.mdp}" label="MDP" />
+				<p:password value="#{aMB.admin.mdp}" label="MDP"/>
 
 				<f:facet name="footer">
 					<p:commandButton value="seConnecter" action="#{aMB.seConnecter}" />

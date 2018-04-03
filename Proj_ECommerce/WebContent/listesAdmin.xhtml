@@ -86,7 +86,7 @@
 			</p:column>
 
 			<p:column headerText="Photo">
-				<p:graphicImage value="#{pd.image}" />
+				<h:graphicImage value="#{pd.image}" />
 			</p:column>
 		</p:dataTable>
 
@@ -100,18 +100,18 @@
 		<p:dataTable var="ct" value="#{sessionScope.categorieListe}">
 
 			<p:column headerText="Id">
-				<h:outputText value="#{ct.id}" />
+				<h:outputText value="#{ct.id}"/>
 			</p:column>
 			<p:column headerText="Nom">
-				<h:outputText value="#{ct.nomCategorie}" />
+				<h:outputText value="#{ct.nomCategorie}"/>
 			</p:column>
 
 			<p:column headerText="Description">
-				<h:outputText value="#{ct.description}" />
+				<h:outputText value="#{ct.description}"/>
 			</p:column>
 
 			<p:column headerText="Photo">
-				<p:graphicImage value="#{ct.image}" />
+				<h:graphicImage value="#{ct.image}"/>
 			</p:column>
 		</p:dataTable>
 
@@ -119,7 +119,7 @@
 
 
 <p:dock position="bottom">
-		<p:menuitem value="Accueil" icon="resources/image/house1.png" url="accueil.xhtml" />
+		<p:menuitem value="Accueil" icon="resources/image/house1.png" url="accueil.xhtml"/>
 
 	</p:dock>
 
