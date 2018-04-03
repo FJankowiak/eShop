@@ -81,7 +81,7 @@ public class ClientManagedBean implements Serializable{
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Impossible d'ajouter le client"));
 
-			return "clientCreation";
+			return "ajoutClient";
 		}
 	}
 

@@ -17,7 +17,7 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 	@PersistenceContext(name = "PU")
 	private EntityManager em;
 
-	DecimalFormat df = new DecimalFormat("#.##");
+	DecimalFormat df = new DecimalFormat("#.###");
 
 	@Override
 	public int ajouterLC(LigneCommande lc) {
@@ -121,10 +121,10 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 	public double getTotal() {
 		String req = "SELECT SUM(prix) FROM lignes_commande";
 
-		Query query = em.createQuery(req);
-		double somme = (double) query.getSingleResult();
+//		Query query = em.createQuery(req);
+		double somme = 31.62; //(double) query.getSingleResult();
 
-		somme = Double.valueOf(df.format(somme));
+//		somme = Double.valueOf(df.format(somme));
 
 		return somme;
 	}

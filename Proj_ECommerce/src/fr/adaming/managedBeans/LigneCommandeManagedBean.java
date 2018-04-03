@@ -27,8 +27,8 @@ public class LigneCommandeManagedBean implements Serializable {
 	ILigneCommandeService lcService;
 	@EJB
 	IProduitService prodService;
-	@ManagedProperty(value="#{produit}")
-	private ProduitManagedBean produit;
+//	@ManagedProperty(value="#{produit}")
+	private Produit produit;
 	
 	
 	//Attributs
@@ -52,11 +52,11 @@ public class LigneCommandeManagedBean implements Serializable {
 		this.lCommande = lCommande;
 	}
 
-	public ProduitManagedBean getProduit() {
+	public Produit getProduit() {
 		return produit;
 	}
 
-	public void setProduit(ProduitManagedBean produit) {
+	public void setProduit(Produit produit) {
 		this.produit = produit;
 	}
 	
