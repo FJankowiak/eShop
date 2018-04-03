@@ -7,32 +7,33 @@
 
 <h:head>
 	<title>Page de test d'ajout au panier</title>
-	<h:outputStylesheet library="css" name="monStyle.css"/>
+	<h:outputStylesheet library="css" name="monStyle.css" />
 </h:head>
 
 <h:body>
 
-	<p:graphicImage library="image" name="logo.jpg" styleClass="logo"/>
-	
-		
-		<h1 style = "color: coral; text-align: center">Modifier le panier</h1>
+	<p:graphicImage library="image" name="logo.jpg" styleClass="logo" />
 
-			<h:messages style="color : red" />
-			
-			<h:form>
-				<h:panelGrid columns="2">
+
+	<h1 style="color: coral; text-align: center">Modifier le panier</h1>
+
+	<h:messages style="color : red" />
+
+	<h:form>
+		<h:panelGrid columns="2">
 			 Id : <h:inputText value="#{lcMB.id_prod}" />
 			 Quantité : <h:inputText value="#{lcMB.lCommande.quantite}" />
  			 
 			
 			<h:commandButton value="Modifier le panier" action="#{lcMB.updateLC}" />
-				</h:panelGrid>
+		</h:panelGrid>
 
-			</h:form>
+	</h:form>
 
 
 	<p:dock position="bottom">
-		<p:menuitem value="Accueil" icon="resources/image/house1.png" url="accueil.xhtml" />
+		<p:menuitem value="Accueil" icon="resources/image/house1.png"
+			url="accueil.xhtml" />
 
 	</p:dock>
 
