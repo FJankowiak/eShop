@@ -7,32 +7,43 @@
 
 <h:head>
 	<title>Page accueil</title>
-	
-	<h:outputStylesheet library="css" name="monStyle.css"/>
+
+	<h:outputStylesheet library="css" name="monStyle.css" />
 </h:head>
 
 <h:body>
-	<p:graphicImage library="image" name="logo.jpg" styleClass="logo"/>
-		
-		<h:form styleClass="log">
+	<p:graphicImage library="image" name="logo.jpg" styleClass="logo" />
+
+	<h:form styleClass="log">
 		<h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();"
 			title="login">
 			<p:graphicImage library="image" name="lock.png" styleClass="login" />
 		</h:outputLink>
 		<h4>Espace administrateur</h4>
-		</h:form>
-		
-		
+	</h:form>
+
+	<h:form>
+		<p:breadCrumb>
+			<p:menuitem value="Accueil" url="accueil.xhtml" />
+			<p:menuitem value="Produits par catégorie"
+				url="listeParCategorie.xhtml" />
+			<p:menuitem value="Modifier le panier" url="modifPanier.xhtml" />
+			<p:menuitem value="Mon panier" url="panier.xhtml" />
+		</p:breadCrumb>
+	</h:form>
+
+
 	<p:dock position="bottom">
-		<p:menuitem value="Accueil" url="accueil.xhtml"/>
+		<p:menuitem value="Accueil" url="accueil.xhtml" />
 
 	</p:dock>
- <div class="ui-g-12 ui-md-4">
-        <div class="ui-inputgroup">
-            <p:inputText placeholder="rechercher" />
-            <p:commandButton icon="fa fa-search"  styleClass="white-button"/>  
-        </div>
-    </div>
+
+	<div class="ui-g-12 ui-md-4">
+		<div class="ui-inputgroup">
+			<p:inputText placeholder="rechercher" />
+			<p:commandButton icon="fa fa-search" styleClass="white-button" />
+		</div>
+	</div>
 
 	<h1 style="color:; text-align: center">Liste des catégories</h1>
 	<h:form>
@@ -43,47 +54,45 @@
 
 		<p:dataTable var="ct" value="#{sessionScope.categorieListe}">
 			<p:column headerText="ID">
-				<h:outputText value="#{ct.id}"/>
+				<h:outputText value="#{ct.id}" />
 			</p:column>
 
 			<p:column headerText="Nom">
-				<h:outputText value="#{ct.nomCategorie}"/>
+				<h:outputText value="#{ct.nomCategorie}" />
 			</p:column>
 
 			<p:column headerText="Description">
-				<h:outputText value="#{ct.description}"/>
+				<h:outputText value="#{ct.description}" />
 			</p:column>
 
 			<p:column headerText="Photo">
-				<h:graphicImage value="#{ct.image}"/>
+				<h:graphicImage value="#{ct.image}" />
 			</p:column>
 
-			
+
 
 		</p:dataTable>
 
 	</h:form>
-	
-	
+
+
 
 
 	<h:form>
-		
-
-
-
 		<p:dialog header="Connexion" widgetVar="dlg">
 			<h:panelGrid columns="2" cellpadding="5">
 				<h:outputLabel value="Mail:" />
-				<p:inputText value="#{aMB.admin.mail}" label="mail"/>
+				<p:inputText value="#{aMB.admin.mail}" label="mail" />
 
 				<h:outputLabel value="MDP:" />
-				<p:password value="#{aMB.admin.mdp}" label="MDP"/>
+				<p:password value="#{aMB.admin.mdp}" label="MDP" />
 
 				<f:facet name="footer">
-					<p:commandButton value="seConnecter" action="#{aMB.seConnecter}" />
+					<p:commandButton value="Se connecter" action="#{aMB.seConnecter}" />
 				</f:facet>
 			</h:panelGrid>
+
+			<h:messages style="color: red" />
 		</p:dialog>
 	</h:form>
 
