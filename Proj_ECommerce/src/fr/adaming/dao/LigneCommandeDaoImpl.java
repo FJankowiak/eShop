@@ -21,7 +21,7 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 
 	@Override
 	public int ajouterLC(LigneCommande lc) {
-		lc.setPrix(Double.valueOf(df.format(lc.getPrix())));
+//		lc.setPrix(Double.valueOf(df.format(lc.getPrix())));
 
 		em.persist(lc);
 
@@ -34,6 +34,8 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 
 	@Override
 	public int supprimerLC(LigneCommande lc) {
+		
+		System.out.println("La ligne de commande : =\n" + lc);
 
 		LigneCommande lcOut = em.find(LigneCommande.class, lc.getId_ligne());
 
@@ -52,7 +54,9 @@ public class LigneCommandeDaoImpl implements ILigneCommandeDao {
 	public int modifierLC(LigneCommande lc) {
 		Long id_prod = lc.getProduit().getId();
 		int qt = lc.getQuantite();
-		double prix = Double.valueOf(df.format(lc.getPrix()));
+		
+		System.out.println(lc.getPrix());
+		double prix = lc.getPrix();
 
 		// Requete JPQL
 		String req1 = "UPDATE LigneCommande lc SET lc.quantite=:pQuantite, lc.prix=:pPrix WHERE lc.produit.id=:pId";

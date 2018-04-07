@@ -16,6 +16,7 @@ import fr.adaming.model.Commande;
 import fr.adaming.model.LigneCommande;
 import fr.adaming.service.IClientService;
 import fr.adaming.service.ICommandeService;
+import fr.adaming.service.ILigneCommandeService;
 
 @ManagedBean(name = "clMB")
 @RequestScoped
@@ -25,6 +26,8 @@ public class ClientManagedBean implements Serializable{
 	IClientService clientService;
 	@EJB
 	ICommandeService commandeService;
+	@EJB
+	ILigneCommandeService lcService;
 	
 	
 	// Attributs
@@ -36,14 +39,12 @@ public class ClientManagedBean implements Serializable{
 	
 	
 	
-//	@PostConstruct // pour que cette méthode s'execute après l'instanciation du ManagedBean
-//	public void init(){
+	@PostConstruct // pour que cette méthode s'execute après l'instanciation du ManagedBean
+	public void init(){
 //		// Recuperer la session ouverte
-//		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-////		maSession.setAttribute("listeProduits", produitService.getAllProduits());
-////		maSession.setAttribute("listeCategories", categorieService.getAllCategories());
+		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 //		
-//	}
+	}
 
 	public ClientManagedBean() {
 		this.client = new Client();
@@ -76,6 +77,11 @@ public class ClientManagedBean implements Serializable{
 			List<LigneCommande> liste = (List<LigneCommande>) maSession.getAttribute("panier");
 			System.out.println(liste);
 			this.commande = commandeService.finaliserCommande(liste, clAjout);
+			
+			// TODO inserer la fonction PDF
+//			commandeService.bilanPDF(commande, total);
+			
+			lcService.viderLC();
 			
 			return "commandeValidee";
 		} else {

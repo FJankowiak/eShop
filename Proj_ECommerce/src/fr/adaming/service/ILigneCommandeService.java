@@ -10,7 +10,7 @@ import fr.adaming.model.LigneCommande;
 public interface ILigneCommandeService {
 //	public int ajouterLC(LigneCommande lc, Long id_prod);
 //	
-//	public int supprimerLC(LigneCommande lc);
+	public int deleteLC(LigneCommande lc);
 //	
 //	public int modifierLC(LigneCommande lc);
 //	

@@ -39,18 +39,14 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService {
 					System.out.println("Mise à jour");
 					lc.setPrix(produit.getPrix() * lc.getQuantite());
 
-
 					System.out.println(lc.getPrix());
 
 					return ligneCommandeDao.modifierLC(lc);
 				}
 			} else if (lc.getQuantite() != 0){
-				System.out.println("Ajout");
 				lc.setPrix(produit.getPrix() * lc.getQuantite());
 				return ligneCommandeDao.ajouterLC(lc);
-			} else {
-				System.out.println("Nada");
-			}
+			} 
 
 		}
 		return 0;
@@ -66,6 +62,10 @@ public class LigneCommandeServiceImpl implements ILigneCommandeService {
 	@Override
 	public void viderLC() {
 		ligneCommandeDao.viderLC();		
+	}
+	@Override
+	public int deleteLC(LigneCommande lc) {
+		return ligneCommandeDao.supprimerLC(lc);
 	}
 
 }

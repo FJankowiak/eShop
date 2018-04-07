@@ -13,14 +13,29 @@
 <h:body>
 	<p:graphicImage library="image" name="logo.jpg" styleClass="logo" />
 
+	<h:form>
+		<p:breadCrumb>
+			<p:menuitem value="Accueil" url="accueil.xhtml" />
+			<p:menuitem value="Produits par catégorie"
+				url="listeParCategorie.xhtlm" />
+			<p:menuitem value="Modifier le panier" url="modifPanier.xhtml" />
+			<p:menuitem value="Mon panier" url="panier.xhtml" />
+		</p:breadCrumb>
+	</h:form>
+
 	<h1 style="color: coral; text-align: center">Mon panier</h1>
 
 	<h:form>
-	<p:graphicImage library="image" name="shopping-basket.png" />
+		<p:graphicImage library="image" name="shopping-basket.png" />
 		<p:dataTable var="pa" value="#{sessionScope.panier}">
 
+
 			<p:column headerText="ID Produit">
-				<h:outputText value="#{pa.getProduit().getId()}" />
+				<h:outputText value="#{pa.produit.id}" />
+			</p:column>
+
+			<p:column headerText="Produit">
+				<h:outputText value="#{pa.produit.designation}" />
 			</p:column>
 
 			<p:column headerText="Quantité">
@@ -28,18 +43,16 @@
 			</p:column>
 
 			<p:column headerText="Prix">
-				<h:outputText value="#{pa.prix}" />
+				<h:outputText value="#{pa.prix}€" />
 			</p:column>
 
 			<p:column headerText="Operations">
-				<h:commandLink value="Modifier" action="#" update="@all">
-					<f:setPropertyActionListener value="#{lc.id}" target="#" />
-					<f:setPropertyActionListener value="#{lc.quantite}" target="#" />
-				</h:commandLink> | 
-						<h:commandLink value="Supprimer" action="#{lcMB.supprimerLC}"
+
+				Modifier | 
+				<h:commandLink value="Supprimer" action="#{lcMB.supprimerLC}"
 					update="@all">
-					<f:setPropertyActionListener value="#{lcMB.id}"
-						target="#{lcMB.produit.id_p}" />
+					<f:setPropertyActionListener value="#{pa.produit.id}"
+						target="#{lcMB.id_prod}" />
 				</h:commandLink>
 
 			</p:column>
@@ -50,8 +63,11 @@
 
 	<h:link value="Finaliser la commande" outcome="ajoutClient.xhtml" />
 
+	<h:messages />
+
 	<p:dock position="bottom">
-		<p:menuitem value="Accueil" icon="resources/image/house1.png" url="accueil.xhtml" />
+		<p:menuitem value="Accueil" icon="resources/image/house1.png"
+			url="accueil.xhtml" />
 
 	</p:dock>
 

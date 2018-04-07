@@ -36,6 +36,7 @@ public class LigneCommandeManagedBean implements Serializable {
 //	private Produit produit;
 	HttpSession maSession;
 	private Long id_prod;
+	private int id;
 	
 	public LigneCommandeManagedBean() {
 		this.lCommande = new LigneCommande();
@@ -67,6 +68,14 @@ public class LigneCommandeManagedBean implements Serializable {
 	public void setId_prod(Long id_prod) {
 		this.id_prod = id_prod;
 	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	// Méthodes
 	@PostConstruct
@@ -74,7 +83,12 @@ public class LigneCommandeManagedBean implements Serializable {
 		// RECUPERER LA SESSION
 		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		List<LigneCommande> lcListe = lcService.getLigneCommande();
-		maSession.setAttribute("totalCommande", lcService.getTotal());
+		
+		double total = lcService.getTotal();
+		System.out.println(total);
+				
+		maSession.setAttribute("totalCommande", total);
+		
 		System.out.println(lcListe);
 //		maSession.setAttribute("panier", lcListe);
 
@@ -85,6 +99,9 @@ public class LigneCommandeManagedBean implements Serializable {
 
 	
 	public String updateLC(){
+		System.out.println("Id " + id_prod + " quantité 0 " + lCommande.getQuantite());
+		
+		
 		int verif = lcService.updateLC(lCommande, id_prod);
 		
 		if(verif != 0){
@@ -100,17 +117,32 @@ public class LigneCommandeManagedBean implements Serializable {
 		
 	}
 	
-	
-	public String modifierLC(){
-		System.out.println("Modifier : le produit est là ?");
-		System.out.println(this.produit);
+//	
+	public String supprimerLC(){
+		lCommande.setQuantite(0);
+		
+		System.out.println(lCommande + " " + id_prod);
 		
 		
-		int verif = 0;
-		//int verif = lcService.modifierLC(lCommande, id_prod);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Iciiiii à Naganoooooo"));
+		int verif = lcService.updateLC(lCommande, id_prod);
+		
+		if(verif == 0){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur au cours de la modification du panier"));
+		} else {
+			List<LigneCommande> liste = lcService.getLigneCommande();
+			this.maSession.setAttribute("panier", liste);
+		}
+		return "panier";
 
-		return null;		
+//		System.out.println("Modifier : le produit est là ?");
+//		System.out.println(this.produit);
+//		
+//		
+//		int verif = 0;
+//		//int verif = lcService.modifierLC(lCommande, id_prod);
+//		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Iciiiii à Naganoooooo"));
+//
+//		return null;		
 	}
 	
 	
